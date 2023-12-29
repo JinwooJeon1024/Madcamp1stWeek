@@ -3,6 +3,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.madcamp1stweek.AddRestaurantActivity
 import com.example.madcamp1stweek.R
 import com.example.madcamp1stweek.databinding.FragmentHomeBinding
@@ -68,8 +70,8 @@ class HomeFragment : Fragment() {
                 val name = it.getStringExtra("name") ?: ""
                 val phoneNumber = it.getStringExtra("phoneNumber") ?: ""
                 val description = it.getStringExtra("description") ?: ""
-
-                val newRestaurant = Restaurant(name, phoneNumber, description)  // 기본 설명 추가
+                val imageUrl = it.getStringExtra("imageUrl")?:""
+                val newRestaurant = Restaurant(name, phoneNumber, description, imageUrl)  // 기본 설명 추가
 
                 // 확장 함수를 사용하여 식당 추가 및 정렬
                 loadedRestaurants.addAndSort(newRestaurant)
@@ -97,7 +99,7 @@ class HomeFragment : Fragment() {
         return Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type)
     }
 
-    data class Restaurant(val name: String, val phoneNumber: String, val description: String)
+    data class Restaurant(val name: String, val phoneNumber: String, val description: String, val imageUrl:String)
 
     class RestaurantAdapter : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
         // ViewHolder 및 기타 필요한 메서드 구현
@@ -105,6 +107,7 @@ class HomeFragment : Fragment() {
             val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
             val phoneNumberTextView: TextView = itemView.findViewById(R.id.phoneNumberTextView)
             val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+            val imageView: ImageView = itemView.findViewById(R.id.imageView)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -117,6 +120,9 @@ class HomeFragment : Fragment() {
             holder.nameTextView.text = item.name
             holder.phoneNumberTextView.text = item.phoneNumber
             holder.descriptionTextView.text = item.description
+            Glide.with(holder.itemView.context)
+                .load(item.imageUrl)
+                .into(holder.imageView)
         }
 
         class RestaurantDiffCallback : DiffUtil.ItemCallback<Restaurant>() {

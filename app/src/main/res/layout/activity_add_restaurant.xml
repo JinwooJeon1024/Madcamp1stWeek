@@ -27,6 +27,14 @@ android:hint="전화번호" />
         android:hint="설명"
     />
 
+    <EditText
+        android:id="@+id/imageUrlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Image URL"
+    />
+
+
     <!-- 저장 버튼 -->
 <Button
 android:id="@+id/saveButton"

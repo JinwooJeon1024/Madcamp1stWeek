@@ -2,17 +2,20 @@
   {
     "name": "피자뉴스",
     "phoneNumber": "010-1234-5678",
-    "description": "정말 정말 맛있어요 레전드 맛집 인정!!!!!"
+    "description": "정말 정말 맛있어요 레전드 맛집 인정!!!!!",
+    "imageUrl": "https://i.namu.wiki/i/qFWfOHBd0mx7NmNquwtaSbUjnPumXpk5oi1jxNKpWUsv_eGJe44xm9AePkbhQ6hIxTjMtroFaOFPbhBy0MSbNQ.webp"
   },
   {
     "name": "마라탕마라",
     "phoneNumber": "010-2345-6789",
-    "description": "인생 마라탕 맛집 추천 추천 왕추천"
+    "description": "인생 마라탕 맛집 추천 추천 왕추천",
+    "imageUrl": "https://hannamkitchen.com/wp-content/uploads/2017/09/분식전문점-컨셉-blog-5.jpg"
   },
   {
     "name": "훌랄라치킨",
     "phoneNumber": "010-9872-1828",
-    "description": "굳굳ㄱ둑ㄱ두굳!!"
+    "description": "굳굳ㄱ둑ㄱ두굳!!",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
   }
 
 ]
