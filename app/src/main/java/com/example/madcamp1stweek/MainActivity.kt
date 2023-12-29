@@ -1,6 +1,7 @@
 package com.example.madcamp1stweek
 
 import android.os.Bundle
+import android.widget.GridLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -31,5 +32,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val recyclerView: RecyclerView = findViewById(R.id.galleryRecyclerView)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.adapter = GalleryAdapter(images)
+
     }
 }
