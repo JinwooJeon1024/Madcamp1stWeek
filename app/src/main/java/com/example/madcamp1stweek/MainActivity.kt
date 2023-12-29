@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(){
             ItemData(R.drawable.image5, "Title 2", "Content 2"),
         )
 
-        recyclerView.layoutManager = LinearLayoutManager(this) // 또는 GridLayoutManager 등
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = MyRecyclerAdapter(itemData)
     }
 }
