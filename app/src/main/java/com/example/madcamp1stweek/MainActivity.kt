@@ -33,30 +33,5 @@ class MainActivity : AppCompatActivity(){
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val recyclerView: RecyclerView = findViewById(R.id.galleryRecyclerView)
-
-        val itemData = listOf(
-            ItemData(R.drawable.image1, "Title 1", "Content 1"),
-            ItemData(R.drawable.image2, "Title 2", "Content 2"),
-            ItemData(R.drawable.image3, "Title 2", "Content 2"),
-            ItemData(R.drawable.image4, "Title 2", "Content 2"),
-            ItemData(R.drawable.image5, "Title 2", "Content 2"),
-            ItemData(R.drawable.image6, "Title 1", "Content 1"),
-            ItemData(R.drawable.image7, "Title 1", "Content 1"),
-            ItemData(R.drawable.image8, "Title 2", "Content 2"),
-            ItemData(R.drawable.image9, "Title 2", "Content 2"),
-            ItemData(R.drawable.image10, "Title 2", "Content 2"),
-            ItemData(R.drawable.image11, "Title 2", "Content 2"),
-            ItemData(R.drawable.image12, "Title 2", "Content 2"),
-            ItemData(R.drawable.image13, "Title 2", "Content 2"),
-            ItemData(R.drawable.image14, "Title 2", "Content 2"),
-            ItemData(R.drawable.image15, "Title 2", "Content 2"),
-        )
-
-        val numOfColumns = 3
-        recyclerView.layoutManager = GridLayoutManager(this, numOfColumns)
-        recyclerView.adapter = MyRecyclerAdapter(itemData)
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(3, 50, true))
     }
 }
