@@ -37,26 +37,6 @@ class DashboardFragment : Fragment() {
         return root
     }
 
-    class GalleryAdapter(private val images: List<String>) : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
-
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val imageView: ImageView = view.findViewById(R.id.imageView)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val context = parent.context
-            val inflater = LayoutInflater.from(context)
-            val imageView = inflater.inflate(R.layout.item_image, parent, false)
-            return ViewHolder(imageView)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val imageUrl = images[position]
-            Glide.with(holder.imageView.context).load(imageUrl).into(holder.imageView)
-        }
-
-        override fun getItemCount() = images.size
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

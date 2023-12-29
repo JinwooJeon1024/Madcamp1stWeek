@@ -1,7 +1,6 @@
 package com.example.madcamp1stweek
 
 import android.os.Bundle
-import android.widget.GridLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,8 +8,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.madcamp1stweek.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
 
@@ -34,8 +35,16 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val recyclerView: RecyclerView = findViewById(R.id.galleryRecyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-        recyclerView.adapter = GalleryAdapter(images)
 
+        val itemData = listOf(
+            ItemData(R.drawable.image1, "Title 1", "Content 1"),
+            ItemData(R.drawable.image2, "Title 2", "Content 2"),
+            ItemData(R.drawable.image3, "Title 2", "Content 2"),
+            ItemData(R.drawable.image4, "Title 2", "Content 2"),
+            ItemData(R.drawable.image5, "Title 2", "Content 2"),
+        )
+
+        recyclerView.layoutManager = LinearLayoutManager(this) // 또는 GridLayoutManager 등
+        recyclerView.adapter = MyRecyclerAdapter(itemData)
     }
 }
