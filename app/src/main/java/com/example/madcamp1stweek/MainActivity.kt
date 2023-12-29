@@ -7,8 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.madcamp1stweek.databinding.ActivityMainBinding
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(){
@@ -42,9 +42,21 @@ class MainActivity : AppCompatActivity(){
             ItemData(R.drawable.image3, "Title 2", "Content 2"),
             ItemData(R.drawable.image4, "Title 2", "Content 2"),
             ItemData(R.drawable.image5, "Title 2", "Content 2"),
+            ItemData(R.drawable.image6, "Title 1", "Content 1"),
+            ItemData(R.drawable.image7, "Title 1", "Content 1"),
+            ItemData(R.drawable.image8, "Title 2", "Content 2"),
+            ItemData(R.drawable.image9, "Title 2", "Content 2"),
+            ItemData(R.drawable.image10, "Title 2", "Content 2"),
+            ItemData(R.drawable.image11, "Title 2", "Content 2"),
+            ItemData(R.drawable.image12, "Title 2", "Content 2"),
+            ItemData(R.drawable.image13, "Title 2", "Content 2"),
+            ItemData(R.drawable.image14, "Title 2", "Content 2"),
+            ItemData(R.drawable.image15, "Title 2", "Content 2"),
         )
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val numOfColumns = 3
+        recyclerView.layoutManager = GridLayoutManager(this, numOfColumns)
         recyclerView.adapter = MyRecyclerAdapter(itemData)
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(3, 50, true))
     }
 }
