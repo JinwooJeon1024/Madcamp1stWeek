@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.madcamp1stweek.AddRestaurantActivity
 import com.example.madcamp1stweek.R
+import com.example.madcamp1stweek.RestaurantViewModel
 import com.example.madcamp1stweek.databinding.FragmentHomeBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -31,10 +33,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val loadedRestaurants = mutableListOf<Restaurant>()
+    private val restaurantViewModel: RestaurantViewModel by activityViewModels()
     private val ADD_RESTAURANT_REQUEST = 1  // 요청 코드 정의
-    class RestaurantViewModel : ViewModel() {
-        val loadedRestaurants = mutableListOf<Restaurant>()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         }
 
         // 리사이클러뷰 설정
-        val adapter = RestaurantAdapter()
+        val adapter = RestaurantAdapter(loadedRestaurants)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = adapter
@@ -66,6 +66,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        restaurantViewModel.loadRestaurantsFromJSON(requireContext())
 
         // 식당 등록하기 버튼 클릭 이벤트 처리
         binding.addRestaurantButton.setOnClickListener {
@@ -111,7 +112,7 @@ class HomeFragment : Fragment() {
 
     data class Restaurant(val name: String, val address: String, val phoneNumber: String, val imageUrl:String)
 
-    class RestaurantAdapter : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
+    class RestaurantAdapter(private val loadedRestaurants: MutableList<Restaurant>) : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
         // ViewHolder 및 기타 필요한 메서드 구현
         private val restaurants = mutableListOf<Restaurant>()
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -146,10 +147,9 @@ class HomeFragment : Fragment() {
         }
         fun deleteItem(position: Int) {
             if (position in restaurants.indices) {
-                val deletedRestaurant = restaurants.removeAt(position)
-                restaurants.removeAt(position)
-                Log.d("Adapter", "Deleting item at position $position")
+                loadedRestaurants.removeAt(position)
                 notifyItemRemoved(position)
+                notifyItemRangeChanged(position, itemCount)
             }
         }
         fun setRestaurants(list: List<Restaurant>){
@@ -172,22 +172,5 @@ class HomeFragment : Fragment() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
             outRect.bottom = verticalSpaceHeight
         }
-    }
-}
-class NotificationsFragment : Fragment() {
-    private val restaurantViewModel: HomeFragment.RestaurantViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_notifications, container, false)
-        // loadedRestaurants를 가져와서 활용
-        val loadedRestaurants = restaurantViewModel.loadedRestaurants
-        // loadedRestaurants를 사용하여 랜덤 식당을 선택하고 팝업 형태로 표시하는 코드 작성
-        val randomRestaurant = loadedRestaurants.random()
-        // 이제 randomRestaurant를 사용하여 팝업을 표시하거나 다른 작업을 수행할 수 있습니다.
-        return rootView
     }
 }
