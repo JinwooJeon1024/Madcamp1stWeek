@@ -57,6 +57,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        // 식당 등록하기 버튼 클릭 이벤트 처리
+        binding.addRestaurantButton.setOnClickListener {
+            val intent = Intent(context, AddRestaurantActivity::class.java)
+            startActivityForResult(intent, ADD_RESTAURANT_REQUEST)
+        }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_RESTAURANT_REQUEST && resultCode == Activity.RESULT_OK) {
