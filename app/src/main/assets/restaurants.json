@@ -1,50 +1,50 @@
 [
   {
     "name": "피자뉴스",
-    "phoneNumber": "010-1234-5678",
-    "address": "대전 유성구 00아랑니",
+    "phoneNumber": "042-823-8874",
+    "address": "대전 유성구 문화원로 55 1층",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm4nR3sQI6R-1ihgqANMQCygpUB_CHWHuJJo0-jKHlOQ&s"
   },
   {
     "name": "달달 마라탕",
     "phoneNumber": "010-2345-6789",
-    "address": "대전 유성구 00이러다 히ㅏ일ㄴ",
+    "address": "수연시 수연구 수연로 01-04",
     "imageUrl": "https://m.designdaldal.com/web/product/big/202104/8b2e6fa181bd15795a27fe3948797284.png"
   },
   {
-    "name": "훌랄라치킨",
-    "phoneNumber": "010-9872-1828",
-    "address": "대전 유성구 이리지ㅏㅇ;ㅣ지",
+    "name": "훌랄라참숯치킨",
+    "phoneNumber": "042-863-5577",
+    "address": "대전 유성구 어은로 48번길 9-9",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
   },
   {
     "name": "궁 칼국수",
-    "phoneNumber": "010-3394-2949",
-    "address": "대전 유성구 ㅁㄴㅇㄹㅁㅈㄷㄱㅎㅁㄴㅇㄹ",
+    "phoneNumber": "042-861-1551",
+    "address": "대전 유성구 어은로 58번길 10",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqnq2QjPyDCzKi8yQLWOMSJTmcRBXMXZhG3Q&usqp=CAU"
   },
   {
     "name": "투다리 어은점",
-    "phoneNumber": "010-9872-1828",
-    "address": "대전 유성구 ㅇㅎ나아라ㅣ필지",
+    "phoneNumber": "042-863-8569",
+    "address": "대전 유성구 어은로 52번길 9",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupAnrle9KfvhBHw6wEGwoAwvFSUiG74zTq6feNgiUZA&s"
   },
   {
     "name": "이비가짬뽕",
-    "phoneNumber": "010-9872-1828",
-    "address": "대전 유성구 허어달;ㅣ지",
+    "phoneNumber": "042-624-7484",
+    "address": "대전 동구 계족로 509",
     "imageUrl": "https://modo-phinf.pstatic.net/20191224_52/1577154308928W6Xoo_JPEG/mosa5PAcxM.jpeg?type=f320_320"
   },
   {
     "name": "고씨네",
-    "phoneNumber": "010-9872-1828",
-    "address": "대전 유성구 이리디ㅣ잉ㅣ지",
+    "phoneNumber": "0507-1320-5915",
+    "address": "대전 유성구 궁동로 18번길 8",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ykzM1a55qEY4Q5q6MHMsdD_vfbafgksKJJjXkYTOvg&s"
   },
   {
     "name": "모티프",
-    "phoneNumber": "010-9872-1828",
-    "address": "대전 유성구 이리지ㅏㅇ;ㅣ지",
+    "phoneNumber": "0507-1483-5612",
+    "address": "대전 유성구 대학로 235-1",
     "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAyMTA3MjZfMTY4/MDAxNjI3MjcxMDEwMjg2.dm-kXDn_gZpL7b7CLiBPtSsxkJUJxrSZfDrWWKZSProg.0JfHG-ziGZKPb9JpJDHu5EarOPylEzjcczZn8vKcrOQg.JPEG.rlajho/IMG_4026.jpg?type=w800"
   }
 ]
