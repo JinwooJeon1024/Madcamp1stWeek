@@ -1,5 +1,6 @@
 package com.example.madcamp1stweek.ui.home
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -68,6 +69,20 @@ class HomeFragment : Fragment() {
 
         restaurantViewModel.loadRestaurantsFromJSON(requireContext())
 
+        // 리사이클러뷰 어댑터 설정
+        val adapter = RestaurantAdapter(loadedRestaurants)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+            addItemDecoration(SpaceItemDecoration(16))
+        }
+
+        // ViewModel의 LiveData를 관찰하여 데이터 변경에 따라 UI 갱신
+        restaurantViewModel.loadedRestaurants.observe(viewLifecycleOwner) { updatedList ->
+            // 어댑터에 변경된 데이터 리스트를 제공
+            adapter.setRestaurants(updatedList.sortedBy { it.name })
+        }
+
         // 식당 등록하기 버튼 클릭 이벤트 처리
         binding.addRestaurantButton.setOnClickListener {
             val intent = Intent(context, AddRestaurantActivity::class.java)
@@ -134,11 +149,20 @@ class HomeFragment : Fragment() {
             holder.addressTextView.text = item.address
             holder.phoneNumberTextView.text = item.phoneNumber
             holder.deleteButton.setOnClickListener {
-                val currentPosition = holder.adapterPosition
-                Log.d("Adapter", "Delete button clicked at position $currentPosition")
-                if (currentPosition != RecyclerView.NO_POSITION) {
-                    deleteItem(currentPosition)
-                }
+                AlertDialog.Builder(it.context)
+                    .setTitle("삭제 확인")
+                    .setMessage("삭제하시겠습니까?")
+                    .setPositiveButton("삭제") { dialog, which ->
+                        val currentPosition = holder.adapterPosition // 현재 위치를 가져옴
+                        if (currentPosition != RecyclerView.NO_POSITION && currentPosition < restaurants.size) {
+                            restaurants.removeAt(currentPosition) // 리스트에서 삭제
+                            notifyItemRemoved(currentPosition) // 아이템 제거 알림
+                            notifyItemRangeChanged(currentPosition, itemCount) // 범위 변경 알림
+
+                        }
+                    }
+                    .setNegativeButton("취소", null)
+                    .show()
             }
 
             Glide.with(holder.itemView.context)
