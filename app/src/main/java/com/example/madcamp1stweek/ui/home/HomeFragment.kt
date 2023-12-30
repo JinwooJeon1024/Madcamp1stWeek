@@ -5,9 +5,11 @@ import android.content.Intent
 import android.graphics.Rect
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -27,7 +29,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val loadedRestaurants = mutableListOf<Restaurant>()
-
     private val ADD_RESTAURANT_REQUEST = 1  // 요청 코드 정의
 
     override fun onCreateView(
@@ -82,7 +83,7 @@ class HomeFragment : Fragment() {
 
                 // 어댑터에 알림을 보내 리스트를 갱신
                 val adapter = binding.recyclerView.adapter as? RestaurantAdapter
-                adapter?.submitList(loadedRestaurants.sortedBy { it.name })
+                adapter?.setRestaurants(loadedRestaurants.sortedBy { it.name })
 
             }
         }
@@ -107,11 +108,13 @@ class HomeFragment : Fragment() {
 
     class RestaurantAdapter : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
         // ViewHolder 및 기타 필요한 메서드 구현
+        private val restaurants = mutableListOf<Restaurant>()
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
             val addressTextView:TextView = itemView.findViewById(R.id.addressTextView)
             val phoneNumberTextView: TextView = itemView.findViewById(R.id.phoneNumberTextView)
             val imageView: ImageView = itemView.findViewById(R.id.imageView)
+            val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -124,9 +127,28 @@ class HomeFragment : Fragment() {
             holder.nameTextView.text = item.name
             holder.addressTextView.text = item.address
             holder.phoneNumberTextView.text = item.phoneNumber
+            holder.deleteButton.setOnClickListener {
+                val currentPosition = holder.adapterPosition
+                Log.d("Adapter", "Delete button clicked at position $currentPosition")
+                if (currentPosition != RecyclerView.NO_POSITION) {
+                    deleteItem(currentPosition)
+                }
+            }
+
             Glide.with(holder.itemView.context)
                 .load(item.imageUrl)
                 .into(holder.imageView)
+        }
+        fun deleteItem(position: Int) {
+            if (position in restaurants.indices) {
+                val deletedRestaurant = restaurants.removeAt(position)
+                restaurants.removeAt(position)
+                Log.d("Adapter", "Deleting item at position $position")
+                notifyItemRemoved(position)
+            }
+        }
+        fun setRestaurants(list: List<Restaurant>){
+            submitList(list)
         }
 
         class RestaurantDiffCallback : DiffUtil.ItemCallback<Restaurant>() {
@@ -138,8 +160,8 @@ class HomeFragment : Fragment() {
                 return oldItem == newItem
             }
         }
-    }
 
+    }
     class SpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
         // getItemOffsets 구현
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
