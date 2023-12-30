@@ -158,7 +158,8 @@ class HomeFragment : Fragment() {
                             restaurants.removeAt(currentPosition) // 리스트에서 삭제
                             notifyItemRemoved(currentPosition) // 아이템 제거 알림
                             notifyItemRangeChanged(currentPosition, itemCount) // 범위 변경 알림
-
+                        } else {
+                            Log.d("DeleteOperation", "Invalid position: $currentPosition")
                         }
                     }
                     .setNegativeButton("취소", null)
