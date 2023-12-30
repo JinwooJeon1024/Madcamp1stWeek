@@ -2,20 +2,49 @@
   {
     "name": "피자뉴스",
     "phoneNumber": "010-1234-5678",
-    "description": "정말 정말 맛있어요 레전드 맛집 인정!!!!!",
+    "address": "대전 유성구 00아랑니",
     "imageUrl": "https://i.namu.wiki/i/qFWfOHBd0mx7NmNquwtaSbUjnPumXpk5oi1jxNKpWUsv_eGJe44xm9AePkbhQ6hIxTjMtroFaOFPbhBy0MSbNQ.webp"
   },
   {
     "name": "마라탕마라",
     "phoneNumber": "010-2345-6789",
-    "description": "인생 마라탕 맛집 추천 추천 왕추천",
+    "address": "대전 유성구 00이러다 히ㅏ일ㄴ",
     "imageUrl": "https://hannamkitchen.com/wp-content/uploads/2017/09/분식전문점-컨셉-blog-5.jpg"
   },
   {
     "name": "훌랄라치킨",
     "phoneNumber": "010-9872-1828",
-    "description": "굳굳ㄱ둑ㄱ두굳!!",
+    "address": "대전 유성구 이리지ㅏㅇ;ㅣ지",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
+  },
+  {
+    "name": "궁 칼국수",
+    "phoneNumber": "010-3394-2949",
+    "address": "대전 유성구 ㅁㄴㅇㄹㅁㅈㄷㄱㅎㅁㄴㅇㄹ",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
+  },
+  {
+    "name": "냐냐난아아",
+    "phoneNumber": "010-9872-1828",
+    "address": "대전 유성구 ㅇㅎ나아라ㅣ필지",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
+  },
+  {
+    "name": "훌헬로헬러",
+    "phoneNumber": "010-9872-1828",
+    "address": "대전 유성구 허어달;ㅣ지",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
+  },
+  {
+    "name": "BHC치킨",
+    "phoneNumber": "010-9872-1828",
+    "address": "대전 유성구 이리디ㅣ잉ㅣ지",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
+  },
+  {
+    "name": "롯데리아",
+    "phoneNumber": "010-9872-1828",
+    "address": "대전 유성구 이리지ㅏㅇ;ㅣ지",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
   }
-
 ]

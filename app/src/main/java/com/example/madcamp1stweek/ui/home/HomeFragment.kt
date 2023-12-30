@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         // JSON에서 식당 데이터 로드
         if (loadedRestaurants.isEmpty()) {
@@ -46,21 +45,16 @@ class HomeFragment : Fragment() {
         }
 
         // 리사이클러뷰 설정
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
         val adapter = RestaurantAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(SpaceItemDecoration(16))
-
-        // 식당 등록하기 버튼 클릭 이벤트 처리
-        binding.addRestaurantButton.setOnClickListener {
-            val intent = Intent(context, AddRestaurantActivity::class.java)
-            startActivityForResult(intent, ADD_RESTAURANT_REQUEST)
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+            addItemDecoration(SpaceItemDecoration(16))
         }
 
         adapter.submitList(loadedRestaurants.sortedBy { it.name })
 
-        return root
+        return binding.root
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -68,10 +62,10 @@ class HomeFragment : Fragment() {
         if (requestCode == ADD_RESTAURANT_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.let {
                 val name = it.getStringExtra("name") ?: ""
+                val address = it.getStringExtra("address")?:""
                 val phoneNumber = it.getStringExtra("phoneNumber") ?: ""
-                val description = it.getStringExtra("description") ?: ""
                 val imageUrl = it.getStringExtra("imageUrl")?:""
-                val newRestaurant = Restaurant(name, phoneNumber, description, imageUrl)  // 기본 설명 추가
+                val newRestaurant = Restaurant(name, address, phoneNumber, imageUrl)  // 기본 설명 추가
 
                 // 확장 함수를 사용하여 식당 추가 및 정렬
                 loadedRestaurants.addAndSort(newRestaurant)
@@ -99,14 +93,14 @@ class HomeFragment : Fragment() {
         return Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type)
     }
 
-    data class Restaurant(val name: String, val phoneNumber: String, val description: String, val imageUrl:String)
+    data class Restaurant(val name: String, val address: String, val phoneNumber: String, val imageUrl:String)
 
     class RestaurantAdapter : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
         // ViewHolder 및 기타 필요한 메서드 구현
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+            val addressTextView:TextView = itemView.findViewById(R.id.addressTextView)
             val phoneNumberTextView: TextView = itemView.findViewById(R.id.phoneNumberTextView)
-            val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
             val imageView: ImageView = itemView.findViewById(R.id.imageView)
         }
 
@@ -118,8 +112,8 @@ class HomeFragment : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = getItem(position)
             holder.nameTextView.text = item.name
+            holder.addressTextView.text = item.address
             holder.phoneNumberTextView.text = item.phoneNumber
-            holder.descriptionTextView.text = item.description
             Glide.with(holder.itemView.context)
                 .load(item.imageUrl)
                 .into(holder.imageView)

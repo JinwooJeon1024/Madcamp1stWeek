@@ -21,10 +21,10 @@ android:layout_height="wrap_content"
 android:hint="전화번호" />
 
     <EditText
-        android:id="@+id/descriptionEditText"
+        android:id="@+id/addressEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="설명"
+        android:hint="주소"
     />
 
     <EditText
