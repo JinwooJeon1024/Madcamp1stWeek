@@ -6,21 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.madcamp1stweek.R
 import com.example.madcamp1stweek.databinding.FragmentNotificationsBinding
 import com.example.madcamp1stweek.ui.home.HomeFragment
 
+
+
 class RestaurantViewModel:ViewModel() {
     val loadedRestaurants = mutableListOf<HomeFragment.Restaurant>()
-    init {
-        // 초기 식당 데이터 로드
-        loadedRestaurants.add(HomeFragment.Restaurant("식당1", "주소1", "010-1234-5678", ""))
-        // 여기에 더 많은 식당 추가 가능
-    }
     }
 class NotificationsFragment : Fragment() {
 
@@ -60,17 +59,25 @@ class NotificationsFragment : Fragment() {
             // 예외 처리 또는 메시지 표시
             return
         }
-
-        // 식당 목록(loadedRestaurants)에서 랜덤하게 하나를 선택
         val randomRestaurant = restaurantViewModel.loadedRestaurants.random()
+        // 선택한 식당 정보를 다이얼로그로 표시
+        val layoutInflater = LayoutInflater.from(context)
+        val popupView = layoutInflater.inflate(R.layout.restaurant_popup, null)  // 팝업용 레이아웃
 
-        // 선택한 식당 정보를 다이얼로그(Dialog)로 표시
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle("Random Restaurant")
-            .setMessage("Name: ${randomRestaurant.name}\nAddress: ${randomRestaurant.address}\nPhone: ${randomRestaurant.phoneNumber}")
-            .setPositiveButton("OK", null)
-            .create()
+        val nameTextView: TextView = popupView.findViewById(R.id.popupName)
+        val addressTextView: TextView = popupView.findViewById(R.id.popupAddress)
+        val phoneNumberTextView: TextView = popupView.findViewById(R.id.popupPhone)
+        val imageView: ImageView = popupView.findViewById(R.id.popupImage)
 
-        dialog.show()
+        nameTextView.text = randomRestaurant.name
+        addressTextView.text = randomRestaurant.address
+        phoneNumberTextView.text = randomRestaurant.phoneNumber
+
+        Glide.with(this).load(randomRestaurant.imageUrl).into(imageView)
+
+        AlertDialog.Builder(requireContext()).apply {
+            setView(popupView)
+            setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
+        }.create().show()
     }
 }
