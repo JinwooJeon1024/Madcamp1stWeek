@@ -55,6 +55,7 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun showRandomRestaurantPopup() {
+
         val loadedRestaurants = restaurantViewModel.loadedRestaurants.value
 
         if (loadedRestaurants.isNullOrEmpty()) {

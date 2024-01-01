@@ -2,7 +2,7 @@
     <string name="app_name">Madcamp1stWeek</string>
     <string name="title_home">맛집 list</string>
     <string name="title_dashboard">리뷰</string>
-    <string name="title_notifications">맛집추천</string>
+    <string name="title_notifications">맛집게임</string>
     <string name="title_add_restaurant">식당 등록하기</string>
     <string name="restaurant_image">Restaurant Image</string>
 </resources>
