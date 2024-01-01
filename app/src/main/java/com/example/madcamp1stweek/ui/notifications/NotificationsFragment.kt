@@ -1,24 +1,18 @@
 package com.example.madcamp1stweek.ui.notifications
 
-import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
-import com.bumptech.glide.Glide
+import com.example.madcamp1stweek.GameActivity
 import com.example.madcamp1stweek.R
 import com.example.madcamp1stweek.RestaurantViewModel
 import com.example.madcamp1stweek.databinding.FragmentNotificationsBinding
-import com.example.madcamp1stweek.ui.home.HomeFragment
 
 class NotificationsFragment : Fragment() {
     private val restaurantViewModel: RestaurantViewModel by activityViewModels()
@@ -55,7 +49,6 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun showRandomRestaurantPopup() {
-
         val loadedRestaurants = restaurantViewModel.loadedRestaurants.value
 
         if (loadedRestaurants.isNullOrEmpty()) {
@@ -63,20 +56,11 @@ class NotificationsFragment : Fragment() {
             return
         }
 
-        val randomRestaurant = loadedRestaurants.random()
-        // 선택한 식당 정보를 다이얼로그로 표시
+        navigateToGameScreen()
+    }
 
-        val popupView = layoutInflater.inflate(R.layout.restaurant_popup, null)  // 팝업용 레이아웃
-
-        popupView.findViewById<TextView>(R.id.popupName).text = randomRestaurant.name
-        popupView.findViewById<TextView>(R.id.popupAddress).text = randomRestaurant.address
-        popupView.findViewById<TextView>(R.id.popupPhone).text = randomRestaurant.phoneNumber
-
-        Glide.with(requireContext()).load(randomRestaurant.imageUrl).into(popupView.findViewById<ImageView>(R.id.popupImage))
-
-        AlertDialog.Builder(requireContext()).apply {
-            setView(popupView)
-            setPositiveButton("확인") { dialog, _ -> dialog.dismiss() }
-        }.create().show()
+    private fun navigateToGameScreen(){
+        val intent = Intent(context, GameActivity::class.java)
+        startActivity(intent)
     }
 }
