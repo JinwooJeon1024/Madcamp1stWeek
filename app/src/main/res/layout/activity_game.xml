@@ -32,8 +32,15 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/gridLayoutCategory"
-        app:srcCompat="@drawable/lottotong" />
-
+        android:src="@drawable/lottotong" />
+    <FrameLayout
+        android:id="@+id/containerBalls"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/gridLayoutCategory"
+        app:layout_constraintBottom_toTopOf="@id/buttonDraw">
+        <!-- 공들이 이 공간 안에서 튀어다닙니다. -->
+    </FrameLayout>
     <!-- 뽑기 버튼 -->
     <Button
         android:id="@+id/buttonDraw"
