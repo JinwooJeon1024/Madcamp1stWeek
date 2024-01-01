@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.FlingAnimation
@@ -126,7 +127,23 @@ class GameActivity : AppCompatActivity() {
                         .setDuration(100)
                         .start()
                 }
+                showPopup()
             }
         }
+    }
+
+    private fun showPopup(){
+        // AlertDialog를 사용하여 팝업창을 만듭니다.
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("공을 뽑았어요 !")
+        builder.setMessage("오늘은 이 곳에 가보세요 !")
+
+        // 확인 버튼을 추가합니다.
+        builder.setPositiveButton("다시 뽑기") { dialog, _ ->
+            dialog.dismiss()  // 팝업창을 닫습니다.
+        }
+
+        // 팝업창을 표시합니다.
+        builder.show()
     }
 }
