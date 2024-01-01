@@ -4,6 +4,8 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
@@ -38,19 +40,22 @@ class GameActivity : AppCompatActivity() {
                     // 10개의 주황색 공 생성
                     for (i in 1..10) {
                         val ball = ImageView(this@GameActivity).apply {
-                            val fillDrawable = ShapeDrawable(OvalShape()).apply {
-                                paint.color = 0xFFFFA500.toInt()  // 주황색 설정
+                            val gradientDrawable = GradientDrawable().apply {
+                                shape = GradientDrawable.OVAL
+                                colors = intArrayOf(0xFFE68A00.toInt(), 0xFFFFFFFF.toInt())  // 오렌지색 그라데이션
+                                gradientType = GradientDrawable.RADIAL_GRADIENT  // 원형 그라데이션
+                                gradientRadius = 200f  // 그라데이션 반경
                             }
 
                             // 검정색 테두리를 위한 동그란 ShapeDrawable 생성
                             val strokeDrawable = ShapeDrawable(OvalShape()).apply {
-                                paint.color = Color.BLACK  // 검정색 설정
+                                paint.color = Color.GRAY // 검정색 설정
                                 paint.style = Paint.Style.STROKE  // 테두리 스타일
                                 paint.strokeWidth = 2f  // 테두리 두께
                             }
 
                             // 두 Drawable을 겹쳐서 LayerDrawable로 만듭니다.
-                            val layers = arrayOf(fillDrawable, strokeDrawable)
+                            val layers = arrayOf<Drawable>(gradientDrawable, strokeDrawable)
                             background = LayerDrawable(layers)
 
                             container.addView(this, ViewGroup.LayoutParams(100, 100))
