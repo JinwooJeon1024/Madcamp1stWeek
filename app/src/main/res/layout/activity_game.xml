@@ -6,42 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <GridLayout
-        android:id="@+id/gridLayoutCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="5"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- 카테고리 아이콘들을 여기에 추가, 예시로 10개의 버튼을 추가함 -->
-        <!-- 실제로는 이미지 버튼이나 이미지뷰를 사용하고 각각에 적절한 아이콘을 설정해야 함 -->
-        <Button android:text="카테고리 1"/>
-        <Button android:text="카테고리 2"/>
-        <Button android:text="카테고리 3"/>
-        <!-- ... 나머지 아이콘들 ... -->
-        <Button android:text="카테고리 10"/>
-    </GridLayout>
-    <!-- 카테고리 아이콘을 나열할 수평 스크롤 뷰 -->
-
     <!-- 로또 통을 표현할 뷰 -->
     <ImageView
         android:id="@+id/imageViewLotto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/gridLayoutCategory"
-        android:src="@drawable/lottotong" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/lottotong" />  <!-- 통 이미지 리소스 -->
+
+    <!-- 공들이 튀어다닐 수 있는 컨테이너 -->
+
+    <!-- 뽑기 버튼 -->
+
     <FrameLayout
         android:id="@+id/containerBalls"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/gridLayoutCategory"
-        app:layout_constraintBottom_toTopOf="@id/buttonDraw">
-        <!-- 공들이 이 공간 안에서 튀어다닙니다. -->
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.309">
+        <!-- 이곳에서 공들이 움직일 것입니다. -->
     </FrameLayout>
-    <!-- 뽑기 버튼 -->
+
     <Button
         android:id="@+id/buttonDraw"
         android:layout_width="wrap_content"
@@ -52,3 +42,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

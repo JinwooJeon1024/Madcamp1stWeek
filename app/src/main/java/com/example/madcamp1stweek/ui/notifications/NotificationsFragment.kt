@@ -49,12 +49,6 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun showRandomRestaurantPopup() {
-        val loadedRestaurants = restaurantViewModel.loadedRestaurants.value
-
-        if (loadedRestaurants.isNullOrEmpty()) {
-            Toast.makeText(context, "식당 목록이 비어 있습니다.", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         navigateToGameScreen()
     }
