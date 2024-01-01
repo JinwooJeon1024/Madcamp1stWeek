@@ -135,7 +135,6 @@ class HomeFragment : Fragment() {
             val addressTextView:TextView = itemView.findViewById(R.id.addressTextView)
             val phoneNumberTextView: TextView = itemView.findViewById(R.id.phoneNumberTextView)
             val imageView: ImageView = itemView.findViewById(R.id.imageView)
-            val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -148,23 +147,6 @@ class HomeFragment : Fragment() {
             holder.nameTextView.text = item.name
             holder.addressTextView.text = item.address
             holder.phoneNumberTextView.text = item.phoneNumber
-            holder.deleteButton.setOnClickListener {
-                AlertDialog.Builder(it.context)
-                    .setTitle("삭제 확인")
-                    .setMessage("삭제하시겠습니까?")
-                    .setPositiveButton("삭제") { dialog, which ->
-                        val currentPosition = holder.adapterPosition // 현재 위치를 가져옴
-                        if (currentPosition != RecyclerView.NO_POSITION && currentPosition < restaurants.size) {
-                            restaurants.removeAt(currentPosition) // 리스트에서 삭제
-                            notifyItemRemoved(currentPosition) // 아이템 제거 알림
-                            notifyItemRangeChanged(currentPosition, itemCount) // 범위 변경 알림
-                        } else {
-                            Log.d("DeleteOperation", "Invalid position: $currentPosition")
-                        }
-                    }
-                    .setNegativeButton("취소", null)
-                    .show()
-            }
 
             Glide.with(holder.itemView.context)
                 .load(item.imageUrl)
