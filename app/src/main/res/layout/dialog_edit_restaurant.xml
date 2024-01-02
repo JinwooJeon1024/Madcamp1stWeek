@@ -1,4 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- dialog_edit_restaurant.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -7,34 +9,27 @@
     <ImageView
         android:id="@+id/editRestaurantImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder_image" />
+        android:layout_height="200dp" /> <!-- 예시 크기, 조정 필요 -->
 
     <EditText
         android:id="@+id/editRestaurantName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Restaurant Name"
-        android:inputType="textPersonName"
-        android:layout_marginTop="8dp"/>
+        android:hint="Restaurant Name" />
 
     <EditText
         android:id="@+id/editRestaurantAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Restaurant Address"
-        android:inputType="textPostalAddress"
-        android:layout_marginTop="8dp"/>
+        android:hint="Address" />
 
-    <Button
-        android:id="@+id/deleteButton"
+    <EditText
+        android:id="@+id/editRestaurantPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Delete Restaurant"
-        android:background="@color/red"
-        android:textColor="@android:color/white" />
+        android:hint="Phone Number" />
+
+    <!-- 이미지 URL을 수정할 EditText 추가할 수 있습니다 -->
+    <!-- 기타 필요한 필드 추가 -->
+
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -143,7 +144,8 @@ class HomeFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = getItem(position)
+            val item = getItem(position) // 현재 아이템을 가져옵니다.
+
             holder.nameTextView.text = item.name
             holder.addressTextView.text = item.address
             holder.phoneNumberTextView.text = item.phoneNumber
@@ -151,32 +153,53 @@ class HomeFragment : Fragment() {
             Glide.with(holder.itemView.context)
                 .load(item.imageUrl)
                 .into(holder.imageView)
+
             holder.itemView.setOnClickListener {
-                showEditDialog(holder.itemView.context, position)
+                // 여기에서는 현재 아이템 위치의 데이터를 사용합니다.
+                showEditDialog(holder.itemView.context, item)
             }
         }
-        private fun showEditDialog(context: Context, position: Int) {
-            val restaurant = loadedRestaurants[position]
 
+        private fun showEditDialog(context: Context, restaurant: Restaurant) {
             // LayoutInflater를 사용하여 custom layout을 inflate
             val inflater = LayoutInflater.from(context)
             val view = inflater.inflate(R.layout.dialog_edit_restaurant, null)
 
-            // AlertDialog를 생성
-            val dialog = AlertDialog.Builder(context)
-                .setTitle("Edit Restaurant")
-                .setView(view)
-                // 이 부분에 EditText와 기타 View에 대한 참조 및 초기 데이터 설정을 진행합니다.
-                // 예: view.findViewById<EditText>(R.id.editTextName).setText(restaurant.name)
-                .setPositiveButton("Update") { dialog, which ->
-                    // 사용자가 Update를 누르면 입력된 데이터로 아이템 업데이트
-                    // 예: restaurant.name = view.findViewById<EditText>(R.id.editTextName).text.toString()
-                    notifyItemChanged(position) // 데이터가 변경됨을 알림
-                }
-                .setNegativeButton("Cancel", null)
-                .create()
+            val imageView = view.findViewById<ImageView>(R.id.editRestaurantImage)
+            val nameEditText = view.findViewById<EditText>(R.id.editRestaurantName)
+            val addressEditText = view.findViewById<EditText>(R.id.editRestaurantAddress)
+            val phoneNumberEditText = view.findViewById<EditText>(R.id.editRestaurantPhoneNumber)
 
-            dialog.show()
+            // 현재 식당 정보를 다이얼로그의 View에 설정합니다.
+            nameEditText.setText(restaurant.name)
+            addressEditText.setText(restaurant.address)
+            phoneNumberEditText.setText(restaurant.phoneNumber)
+            Glide.with(context).load(restaurant.imageUrl).into(imageView)
+
+            AlertDialog.Builder(context).apply {
+                setTitle("Edit Restaurant")
+                setView(view)
+                setPositiveButton("Update") { _, _ ->
+                    // Update the restaurant with new values
+                    val updatedName = nameEditText.text.toString()
+                    val updatedAddress = addressEditText.text.toString()
+                    val updatedPhoneNumber = phoneNumberEditText.text.toString()
+
+                    // Update the existing restaurant in the list
+                    val updatedRestaurant = restaurant.copy(
+                        name = updatedName,
+                        address = updatedAddress,
+                        phoneNumber = updatedPhoneNumber
+                    )
+                    // 여기서 리스트와 어댑터에 변경을 알립니다.
+                    val index = loadedRestaurants.indexOfFirst { it.name == restaurant.name }
+                    if (index != -1) {
+                        loadedRestaurants[index] = updatedRestaurant
+                        notifyItemChanged(index)
+                    }
+                }
+                setNegativeButton("Cancel", null)
+            }.create().show()
         }
         fun deleteItem(position: Int) {
             if (position in restaurants.indices) {
