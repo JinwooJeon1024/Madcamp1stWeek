@@ -256,6 +256,7 @@ class GameActivity : AppCompatActivity() {
             .setView(dialogView)
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
+
     }
 }
 

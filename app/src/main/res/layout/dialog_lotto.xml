@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="400dp"
+    android:layout_height="500dp"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    >
 
     <ImageView
         android:id="@+id/dialog_image"
@@ -17,7 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingTop="8dp"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,6 +27,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingTop="4dp"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

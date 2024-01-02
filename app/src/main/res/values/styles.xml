@@ -11,5 +11,4 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">@drawable/rounded_corners</item>
     </style>
-
 </resources>
