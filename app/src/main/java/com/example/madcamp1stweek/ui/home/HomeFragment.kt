@@ -151,6 +151,32 @@ class HomeFragment : Fragment() {
             Glide.with(holder.itemView.context)
                 .load(item.imageUrl)
                 .into(holder.imageView)
+            holder.itemView.setOnClickListener {
+                showEditDialog(holder.itemView.context, position)
+            }
+        }
+        private fun showEditDialog(context: Context, position: Int) {
+            val restaurant = loadedRestaurants[position]
+
+            // LayoutInflater를 사용하여 custom layout을 inflate
+            val inflater = LayoutInflater.from(context)
+            val view = inflater.inflate(R.layout.dialog_edit_restaurant, null)
+
+            // AlertDialog를 생성
+            val dialog = AlertDialog.Builder(context)
+                .setTitle("Edit Restaurant")
+                .setView(view)
+                // 이 부분에 EditText와 기타 View에 대한 참조 및 초기 데이터 설정을 진행합니다.
+                // 예: view.findViewById<EditText>(R.id.editTextName).setText(restaurant.name)
+                .setPositiveButton("Update") { dialog, which ->
+                    // 사용자가 Update를 누르면 입력된 데이터로 아이템 업데이트
+                    // 예: restaurant.name = view.findViewById<EditText>(R.id.editTextName).text.toString()
+                    notifyItemChanged(position) // 데이터가 변경됨을 알림
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+            dialog.show()
         }
         fun deleteItem(position: Int) {
             if (position in restaurants.indices) {

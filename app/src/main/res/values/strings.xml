@@ -2,7 +2,7 @@
     <string name="app_name">오늘 뭐 먹지?</string>
     <string name="title_home">맛집 list</string>
     <string name="title_dashboard">리뷰</string>
-    <string name="title_notifications">맛집게임</string>
+    <string name="title_notifications">맛집로또</string>
     <string name="title_add_restaurant">식당 등록하기</string>
     <string name="title_add_review">리뷰 쓰기</string>
     <string name="restaurant_image">Restaurant Image</string>
