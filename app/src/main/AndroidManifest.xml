@@ -27,7 +27,7 @@
             android:exported="true"
         android:label="@string/title_add_restaurant">
         </activity>
-
+        <activity android:name=".AddReviewActivity"/>
         <activity android:name=".GameActivity"/>
 
     </application>
