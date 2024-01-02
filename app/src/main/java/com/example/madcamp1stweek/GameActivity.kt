@@ -17,13 +17,18 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.FlingAnimation
 import com.bumptech.glide.Glide
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.madcamp1stweek.databinding.ActivityGameBinding
+import com.example.madcamp1stweek.ui.dashboard.DashboardViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
@@ -31,10 +36,11 @@ import kotlin.math.max
 import kotlin.math.min
 
 data class Restaurant(
-    val name:String,
-    val imageUrl:String,
+    val name: String,
+    val imageUrl: String,
     val category: String
 )
+
 class GameActivity : AppCompatActivity() {
     private val balls = mutableListOf<ImageView>()
     private val animXList = mutableListOf<ValueAnimator>()
@@ -42,19 +48,21 @@ class GameActivity : AppCompatActivity() {
     private var isAnimationRunning = false  // 애니메이션이 실행 중인지 추적합니다.
     private lateinit var binding: ActivityGameBinding
     private val isSelected = BooleanArray(10) { false } // Initialize all as unselected
+    private val viewModel: GameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.loadRestaurantsFromJSON(this, "lotto.json")
         initializeImageButtons()
         setupDrawButton()
         setupBallsAnimation()
     }
+
     private fun initializeImageButtons() {
         val imageButtons = listOf(
-            //... initialize your ImageButtons here
             binding.imageButton1, // Replace with actual IDs from your layout
             binding.imageButton2, // ...
             binding.imageButton3,
@@ -66,6 +74,7 @@ class GameActivity : AppCompatActivity() {
             binding.imageButton9,
             binding.imageButton10
         )
+
         imageButtons.forEachIndexed { index, imageButton ->
             imageButton.alpha = if(isSelected[index]) 1.0f else 0.5f
             imageButton.setOnClickListener {
@@ -74,6 +83,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setupDrawButton() {
         binding.buttonDraw.setOnClickListener {
             if (!isAnimationRunning) {
@@ -173,85 +183,64 @@ class GameActivity : AppCompatActivity() {
         }
         isAnimationRunning = false
     }
-
     private fun randomlySelectRestaurant() {
-        val selectedCategory = isSelected
-            .mapIndexed { index, selected -> if (selected) index.toString() else null }
-            .filterNotNull()
-        val restaurants = loadRestaurantsFromJSON("lotto.json")
+        val restaurants = viewModel.restaurants.value ?: return
 
-        if (selectedCategory.isNotEmpty()) {
-            // Randomly select one of the selected categories
-            val selectedCategory = selectedCategory.random()
+        val selectedIndices = isSelected
+            .mapIndexed { index, isSelected -> if (isSelected) index+1 else null }
+            .filterNotNull() // This will remove any null entries, effectively mimicking mapIndexedNotNull
 
-            // Filter restaurants by the selected category
+        if (selectedIndices.isNotEmpty()) {
+            val selectedCategory = selectedIndices.random().toString()
             val filteredRestaurants = restaurants.filter { it.category == selectedCategory }
 
             if (filteredRestaurants.isNotEmpty()) {
-                // Randomly select one of the restaurants in the filtered list
                 val selectedRestaurant = filteredRestaurants.random()
-
-                // Show details of the selected restaurant in a Dialog
                 showRestaurantDialog(selectedRestaurant)
-            }
-            else {
-                Toast.makeText(
-                    this,
-                    "No restaurants found for selected category",
-                    Toast.LENGTH_SHORT
-                ).show()
+            } else {
+                Toast.makeText(this, "No restaurants found for the selected category.", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(this, "No categories selected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please select at least one category.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun showRestaurantDialog(restaurant: Restaurant) {
-        val context: Context = this // or getActivity() in fragments
-
-        // Create an AlertDialog Builder
-        val dialogBuilder = AlertDialog.Builder(context)
-
-        // Inflate a custom layout for the dialog
         val dialogView = layoutInflater.inflate(R.layout.dialog_lotto, null)
-
-        // References to ImageView and TextViews in the custom layout
         val imageView = dialogView.findViewById<ImageView>(R.id.dialog_image)
         val nameTextView = dialogView.findViewById<TextView>(R.id.dialog_name)
         val categoryTextView = dialogView.findViewById<TextView>(R.id.dialog_category)
 
-        // Set the text for TextViews
         nameTextView.text = restaurant.name
         categoryTextView.text = "Category: ${restaurant.category}"
 
-        // Use Glide to load the image
-        Glide.with(context)
+        Glide.with(this)
             .load(restaurant.imageUrl)
-            .placeholder(R.drawable.loading_spinner) // You can add a placeholder image from your drawable
-            .error(R.drawable.imagenotfound) // Error placeholder image
+            .error(R.drawable.imagenotfound)
             .into(imageView)
 
-        // Set the custom view for dialog
-        dialogBuilder.setView(dialogView)
+        AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+}
 
-        // Set up the buttons
-        dialogBuilder.setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-        val dialog = dialogBuilder.create()
-        dialog.show()
+class GameViewModel : ViewModel() {
+    val restaurants = MutableLiveData<List<Restaurant>>()
+
+    fun loadRestaurantsFromJSON(context: Context, fileName: String) {
+        val jsonString = getJsonDataFromAsset(context, fileName)
+        val typeToken = object : TypeToken<List<Restaurant>>() {}.type
+        restaurants.value = Gson().fromJson(jsonString, typeToken)
     }
-    private fun loadRestaurantsFromJSON(fileName: String): List<Restaurant> {
-        val jsonFileString = getJsonDataFromAsset(applicationContext, fileName)
-        val listRestaurantType = object : TypeToken<List<Restaurant>>() {}.type
-        return Gson().fromJson(jsonFileString, listRestaurantType)
-    }
+
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
+        return try {
+            context.assets.open(fileName).bufferedReader().use { it.readText() }
         } catch (ioException: IOException) {
             ioException.printStackTrace()
-            return null
+            null
         }
-        return jsonString
     }
 }
