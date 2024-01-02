@@ -3,33 +3,60 @@ package com.example.madcamp1stweek
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.madcamp1stweek.databinding.ActivityMainBinding
-
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import com.example.madcamp1stweek.ui.home.HomeFragment
+import com.example.madcamp1stweek.ui.dashboard.DashboardFragment
+import com.example.madcamp1stweek.ui.notifications.NotificationsFragment
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val vp: ViewPager2 by lazy {
+        findViewById(R.id.pager)
+    }
+
+    private val bn: BottomNavigationView by lazy {
+        findViewById(R.id.nav_view)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        vp.apply {
+            adapter = ViewPagerAdapter(this@MainActivity)
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    bn.selectedItemId = when (position) {
+                        0 -> R.id.navigation_home
+                        1 -> R.id.navigation_dashboard
+                        else -> R.id.navigation_notifications
+                    }
+                }
+            })
+        }
 
-        val navView: BottomNavigationView = binding.navView
+        bn.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> vp.currentItem = 0
+                R.id.navigation_dashboard -> vp.currentItem = 1
+                else -> vp.currentItem = 2
+            }
+            true
+        }
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount() = 3
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> HomeFragment()
+                1 -> DashboardFragment()
+                else -> NotificationsFragment()
+            }
+        }
     }
 }
