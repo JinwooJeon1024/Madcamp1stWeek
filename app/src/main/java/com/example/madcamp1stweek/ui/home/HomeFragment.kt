@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,12 +30,45 @@ import com.example.madcamp1stweek.RestaurantViewModel
 import com.example.madcamp1stweek.databinding.FragmentHomeBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.util.UUID
 
 class HomeFragment : Fragment() {
+    class RestaurantViewModel: ViewModel() {
+        val loadedRestaurants = MutableLiveData<List<Restaurant>>()
 
+        init {
+            loadedRestaurants.value = listOf()
+        }
+
+        fun loadRestaurantsFromJSON(context: Context) {
+            val jsonString = context.assets.open("restaurants.json").bufferedReader().use { it.readText() }
+            loadedRestaurants.value = Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type)
+        }
+
+        fun addRestaurant(newRestaurant: Restaurant) {
+            val updatedList = ArrayList(loadedRestaurants.value ?: emptyList())
+            updatedList.add(newRestaurant)
+            updatedList.sortBy { it.name } // Or any other sorting if necessary
+            loadedRestaurants.value = updatedList
+        }
+        fun updateRestaurant(updatedRestaurant: Restaurant) {
+            val currentList = loadedRestaurants.value ?: return  // 현재 리스트를 가져옴
+            val updatedList = currentList.toMutableList()
+            // 해당 식당 찾기 및 업데이트
+            val index = currentList.indexOfFirst { it.id == updatedRestaurant.id }
+            if (index != -1) {
+                updatedList[index] = updatedRestaurant
+                loadedRestaurants.value = updatedList  // LiveData 업데이트
+            }
+        }
+        fun deleteRestaurant(restaurantId: String) {
+            val currentList = loadedRestaurants.value ?: return
+            val updatedList = currentList.filterNot { it.id == restaurantId }
+            loadedRestaurants.value = updatedList
+        }
+    }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val loadedRestaurants = mutableListOf<Restaurant>()
     private val restaurantViewModel: RestaurantViewModel by activityViewModels()
     private val ADD_RESTAURANT_REQUEST = 1  // 요청 코드 정의
 
@@ -46,74 +80,58 @@ class HomeFragment : Fragment() {
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        // JSON에서 식당 데이터 로드
-        if (loadedRestaurants.isEmpty()) {
-            loadedRestaurants.addAll(loadRestaurantsFromAssets(requireContext()))
-        }
-
-        // 리사이클러뷰 설정
-        val adapter = RestaurantAdapter(loadedRestaurants)
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-            addItemDecoration(SpaceItemDecoration(16))
-        }
-
-        adapter.submitList(loadedRestaurants.sortedBy { it.name })
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        restaurantViewModel.loadRestaurantsFromJSON(requireContext())
-
         // 리사이클러뷰 어댑터 설정
-        val adapter = RestaurantAdapter(loadedRestaurants)
+        val adapter = RestaurantAdapter(mutableListOf(), object :
+            RestaurantAdapter.OnRestaurantEditedListener {
+            override fun onRestaurantEdited(restaurant: Restaurant) {
+                restaurantViewModel.updateRestaurant(restaurant)
+            }
+            override fun onRestaurantDeleted(restaurantId: String) {
+                // Implement the deletion logic
+                restaurantViewModel.deleteRestaurant(restaurantId)
+            }
+        })
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = adapter
             addItemDecoration(SpaceItemDecoration(16))
         }
 
-        // ViewModel의 LiveData를 관찰하여 데이터 변경에 따라 UI 갱신
+        // ViewModel의 LiveData 관찰
         restaurantViewModel.loadedRestaurants.observe(viewLifecycleOwner) { updatedList ->
-            // 어댑터에 변경된 데이터 리스트를 제공
-            adapter.setRestaurants(updatedList.sortedBy { it.name })
+            adapter.setRestaurants(updatedList)
         }
 
-        // 식당 등록하기 버튼 클릭 이벤트 처리
+        if (restaurantViewModel.loadedRestaurants.value.isNullOrEmpty()) {
+            restaurantViewModel.loadRestaurantsFromJSON(requireContext())
+        }
         binding.addRestaurantButton.setOnClickListener {
             val intent = Intent(context, AddRestaurantActivity::class.java)
             startActivityForResult(intent, ADD_RESTAURANT_REQUEST)
         }
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_RESTAURANT_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.let {
+                val id = UUID.randomUUID().toString() // UUID를 이용한 고유 ID 생성
                 val name = it.getStringExtra("name") ?: ""
                 val address = it.getStringExtra("address")?:""
                 val phoneNumber = it.getStringExtra("phoneNumber") ?: ""
                 val imageUrl = it.getStringExtra("imageUrl")?:""
-                val newRestaurant = Restaurant(name, address, phoneNumber, imageUrl)  // 기본 설명 추가
-
-                // 확장 함수를 사용하여 식당 추가 및 정렬
-                loadedRestaurants.addAndSort(newRestaurant)
-
+                val newRestaurant = Restaurant(id, name, address, phoneNumber, imageUrl)  // 기본 설명 추가
+                restaurantViewModel.addRestaurant(newRestaurant)
                 // 어댑터에 알림을 보내 리스트를 갱신
-                val adapter = binding.recyclerView.adapter as? RestaurantAdapter
-                adapter?.setRestaurants(loadedRestaurants.sortedBy { it.name })
 
             }
         }
-    }
-
-    fun MutableList<Restaurant>.addAndSort(newRestaurant: Restaurant) {
-        add(newRestaurant)
-        sortBy { it.name }
     }
 
     override fun onDestroyView() {
@@ -121,16 +139,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun loadRestaurantsFromAssets(context: Context): List<Restaurant> {
-        val jsonString = context.assets.open("restaurants.json").bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type)
-    }
+    data class Restaurant(val id: String, val name: String, val address: String, val phoneNumber: String, val imageUrl:String)
 
-    data class Restaurant(val name: String, val address: String, val phoneNumber: String, val imageUrl:String)
-
-    class RestaurantAdapter(private val loadedRestaurants: MutableList<Restaurant>) : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
-        // ViewHolder 및 기타 필요한 메서드 구현
-        private val restaurants = mutableListOf<Restaurant>()
+    class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, private val onRestaurantEditedListener: OnRestaurantEditedListener) : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(RestaurantDiffCallback()) {
+        interface OnRestaurantEditedListener {
+            fun onRestaurantEdited(restaurant: Restaurant)
+            fun onRestaurantDeleted(restaurantId: String)  // Add this line
+        }
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
             val addressTextView:TextView = itemView.findViewById(R.id.addressTextView)
@@ -161,7 +176,6 @@ class HomeFragment : Fragment() {
         }
 
         private fun showEditDialog(context: Context, restaurant: Restaurant) {
-            // LayoutInflater를 사용하여 custom layout을 inflate
             val inflater = LayoutInflater.from(context)
             val view = inflater.inflate(R.layout.dialog_edit_restaurant, null)
 
@@ -169,55 +183,64 @@ class HomeFragment : Fragment() {
             val nameEditText = view.findViewById<EditText>(R.id.editRestaurantName)
             val addressEditText = view.findViewById<EditText>(R.id.editRestaurantAddress)
             val phoneNumberEditText = view.findViewById<EditText>(R.id.editRestaurantPhoneNumber)
+            val imageUrlEditText = view.findViewById<EditText>(R.id.editRestaurantImageUrl)  // Add this line
 
-            // 현재 식당 정보를 다이얼로그의 View에 설정합니다.
+            // Set the current restaurant information in the dialog
             nameEditText.setText(restaurant.name)
             addressEditText.setText(restaurant.address)
             phoneNumberEditText.setText(restaurant.phoneNumber)
+            imageUrlEditText.setText(restaurant.imageUrl)  // Add this line
             Glide.with(context).load(restaurant.imageUrl).into(imageView)
 
-            AlertDialog.Builder(context).apply {
+            val editDialog = AlertDialog.Builder(context).apply {
                 setTitle("Edit Restaurant")
                 setView(view)
                 setPositiveButton("Update") { _, _ ->
-                    // Update the restaurant with new values
                     val updatedName = nameEditText.text.toString()
                     val updatedAddress = addressEditText.text.toString()
                     val updatedPhoneNumber = phoneNumberEditText.text.toString()
+                    val updatedImageUrl = imageUrlEditText.text.toString()  // Add this line
 
-                    // Update the existing restaurant in the list
                     val updatedRestaurant = restaurant.copy(
                         name = updatedName,
                         address = updatedAddress,
-                        phoneNumber = updatedPhoneNumber
+                        phoneNumber = updatedPhoneNumber,
+                        imageUrl = updatedImageUrl  // Update this line
                     )
-                    // 여기서 리스트와 어댑터에 변경을 알립니다.
-                    val index = loadedRestaurants.indexOfFirst { it.name == restaurant.name }
-                    if (index != -1) {
-                        loadedRestaurants[index] = updatedRestaurant
-                        notifyItemChanged(index)
-                    }
+                    onRestaurantEditedListener.onRestaurantEdited(updatedRestaurant)
                 }
                 setNegativeButton("Cancel", null)
-            }.create().show()
-        }
-        fun deleteItem(position: Int) {
-            if (position in restaurants.indices) {
-                loadedRestaurants.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount)
+            }.create()
+
+            val deleteButton = view.findViewById<Button>(R.id.deleteButton)
+            deleteButton.setOnClickListener {
+                // Show confirmation dialog for deletion
+                AlertDialog.Builder(context).apply {
+                    setTitle("Delete Restaurant")
+                    setMessage("Are you sure you want to delete this restaurant?")
+                    setPositiveButton("Delete") { _, _ ->
+                        onRestaurantEditedListener.onRestaurantDeleted(restaurant.id)  // Call the delete method
+                        editDialog.dismiss()  // Dismiss the edit dialog
+                    }
+                    setNegativeButton("Cancel", null)
+                }.create().show()
             }
+
+            editDialog.show()
         }
         fun setRestaurants(list: List<Restaurant>){
             submitList(list)
         }
-
         class RestaurantDiffCallback : DiffUtil.ItemCallback<Restaurant>() {
             override fun areItemsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
+                // 아이템의 고유한 속성이나 ID를 비교하여 동일한 아이템인지 판단합니다.
+                // 예시: return oldItem.id == newItem.id
                 return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
+                // 아이템의 데이터 내용이 같은지 비교합니다.
+                // 예시: return oldItem == newItem
                 return oldItem == newItem
             }
         }

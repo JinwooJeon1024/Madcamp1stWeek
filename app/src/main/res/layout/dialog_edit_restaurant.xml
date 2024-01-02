@@ -1,35 +1,56 @@
-<!-- dialog_edit_restaurant.xml -->
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Delete Button centered horizontally at the top -->
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:text="Delete" />
+
+    <!-- Image View Below the Delete Button -->
     <ImageView
         android:id="@+id/editRestaurantImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp" /> <!-- 예시 크기, 조정 필요 -->
+        android:layout_height="200dp"
+        android:layout_below="@id/deleteButton"
+        android:layout_marginTop="16dp" />
 
+    <!-- Name Edit Text -->
     <EditText
         android:id="@+id/editRestaurantName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editRestaurantImage"
         android:hint="Restaurant Name" />
 
+    <!-- Address Edit Text -->
     <EditText
         android:id="@+id/editRestaurantAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editRestaurantName"
         android:hint="Address" />
 
+    <!-- Phone Number Edit Text -->
     <EditText
         android:id="@+id/editRestaurantPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editRestaurantAddress"
         android:hint="Phone Number" />
 
-    <!-- 이미지 URL을 수정할 EditText 추가할 수 있습니다 -->
-    <!-- 기타 필요한 필드 추가 -->
+    <!-- Image URL Edit Text -->
+    <EditText
+        android:id="@+id/editRestaurantImageUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editRestaurantPhoneNumber"
+        android:hint="Image URL" />
 
-</LinearLayout>
+</RelativeLayout>
