@@ -101,7 +101,7 @@ class GameActivity : AppCompatActivity() {
             val ball = ImageView(this@GameActivity).apply {
                 val gradientDrawable = GradientDrawable().apply {
                     shape = GradientDrawable.OVAL
-                    colors = intArrayOf(0xFFE68A00.toInt(), 0xFFFFFFFF.toInt())  // 오렌지색 그라데이션
+                    colors = intArrayOf(0xFFFF982E.toInt(), 0xFFFFFFFF.toInt())  // 오렌지색 그라데이션
                     gradientType = GradientDrawable.RADIAL_GRADIENT  // 원형 그라데이션
                     gradientRadius = 200f  // 그라데이션 반경
                 }
