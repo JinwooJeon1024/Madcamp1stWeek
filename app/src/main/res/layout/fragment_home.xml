@@ -25,6 +25,7 @@
         android:layout_marginBottom="10dp"
         style="@style/MyButtonStyle"
         android:text="식당 등록하기"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

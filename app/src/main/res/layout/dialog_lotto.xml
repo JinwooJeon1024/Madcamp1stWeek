@@ -8,21 +8,24 @@
     <ImageView
         android:id="@+id/dialog_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="240dp"
+        android:gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/dialog_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingTop="8dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/dialog_category"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:paddingTop="4dp" />
+        android:gravity="center_horizontal"
+        android:paddingTop="4dp"
+        android:textSize="14sp" />
 
 </LinearLayout>

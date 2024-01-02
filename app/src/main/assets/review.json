@@ -1,25 +1,25 @@
 [
   {
     "imageUrl": "https://i.namu.wiki/i/qFWfOHBd0mx7NmNquwtaSbUjnPumXpk5oi1jxNKpWUsv_eGJe44xm9AePkbhQ6hIxTjMtroFaOFPbhBy0MSbNQ.webp",
-    "name": "이미지 1",
+    "name": "달달 마라탕",
     "rating": "⭐4.5",
     "content": "아름다운 풍경 1"
   },
   {
     "imageUrl": "https://hannamkitchen.com/wp-content/uploads/2017/09/분식전문점-컨셉-blog-5.jpg",
-    "name": "이미지 2",
+    "name": "진우분식",
     "rating": "⭐4.2",
     "content": "맛있는 음식 2"
   },
   {
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU",
-    "name": "이미지 3",
+    "name": "훌랄라 참숯치킨",
     "rating": "⭐4.7",
     "content": "멋진 공간 3"
   },
   {
     "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220408_245%2F164941334940196Gkg_JPEG%2F5B0BA142-F960-4950-A4AB-5E6E98C4D711.jpeg",
-    "name": "이미지 4",
+    "name": "24브런치",
     "rating": "⭐3.5",
     "content": "편안한 분위기 4"
   },
