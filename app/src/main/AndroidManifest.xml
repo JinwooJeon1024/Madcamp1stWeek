@@ -33,7 +33,7 @@
             android:exported="true"
             android:label="@string/title_add_review">
         </activity>
-
+        <activity android:name=".GameActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
