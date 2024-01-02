@@ -116,19 +116,19 @@ class GameActivity : AppCompatActivity() {
                 // 두 Drawable을 겹쳐서 LayerDrawable로 만듭니다.
                 val layers = arrayOf<Drawable>(gradientDrawable, strokeDrawable)
                 background = LayerDrawable(layers)
+            }
+            container.addView(ball, ViewGroup.LayoutParams(dpToPx(50), dpToPx(50)))
 
-                post {
-                    val maxX = container.width - width.toFloat()
-                    val maxY = container.height - height.toFloat()
-                    translationX = (Math.random() * maxX).toFloat()
-                    translationY = (Math.random() * maxY).toFloat()
-                }
-                container.addView(this, ViewGroup.LayoutParams(dpToPx(50), dpToPx(50)))
-
+            ball.post {
+                val maxX = container.width - ball.width.toFloat()
+                val maxY = container.height - ball.height.toFloat()
+                ball.translationX = (Math.random() * maxX).toFloat()
+                ball.translationY = (Math.random() * maxY).toFloat()
             }
             setupAnimationForBall(ball, container)
             balls.add(ball)
         }
+
     }
     private fun dpToPx(dp: Int): Int {
         return (dp * resources.displayMetrics.density).toInt()
@@ -142,45 +142,78 @@ class GameActivity : AppCompatActivity() {
         var initialVelocityX = ((Math.random() - 0.5) * 20).toFloat()
         var initialVelocityY = ((Math.random() - 0.5) * 20).toFloat()
 
-        val animX = ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = 50
+        val animX = ValueAnimator.ofFloat().apply {
+            duration = 100
             repeatCount = ValueAnimator.INFINITE
             addUpdateListener {
                 var newX = ball.translationX + initialVelocityX
 
                 if (newX <= 0f || newX >= maxX) {
                     initialVelocityX *= -1
+                    newX = max(0f, min(newX, maxX))
                 }
-                ball.translationX += initialVelocityX
+                ball.translationX = newX
             }
         }
-        val animY = ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = 50
+        val animY = ValueAnimator.ofFloat().apply {
+            duration = 100
             repeatCount = ValueAnimator.INFINITE
             addUpdateListener {
                 var newY = ball.translationY + initialVelocityY
 
                 if (newY <= 0f || newY >= maxY) {
                     initialVelocityY *= -1
+                    newY = max(0f, min(newY, maxY))
                 }
                 ball.translationY = newY
             }
         }
         animXList.add(animX)
         animYList.add(animY)
+
     }
     private fun startBallsAnimation() {
-        animXList.forEach { it.start() }
-        animYList.forEach { it.start() }
+        val container = binding.containerBalls
+        balls.forEach { ball ->
+            val maxX = container.width - ball.width.toFloat()
+            val maxY = container.height - ball.height.toFloat()
+
+            var velocityX = ((Math.random() - 0.5) * 80).toFloat() // 속도를 조절합니다.
+            var velocityY = ((Math.random() - 0.5) * 80).toFloat() // 속도를 조절합니다.
+
+            // X 방향 애니메이션 설정
+            val animX = ValueAnimator.ofFloat(0f, 1f).apply {
+                duration = 50 // 반응 속도를 빠르게 조절합니다.
+                repeatCount = ValueAnimator.INFINITE
+                addUpdateListener {
+                    ball.translationX += velocityX
+                    if (ball.translationX <= 0 || ball.translationX >= maxX) {
+                        velocityX *= -1 // 방향 전환
+                    }
+                }
+            }
+            val animY = ValueAnimator.ofFloat(0f, 1f).apply {
+                duration = 50 // 반응 속도를 빠르게 조절합니다.
+                repeatCount = ValueAnimator.INFINITE
+                addUpdateListener {
+                    ball.translationY += velocityY
+                    if (ball.translationY <= 0 || ball.translationY >= maxY) {
+                        velocityY *= -1 // 방향 전환
+                    }
+                }
+            }
+            animX.start()
+            animY.start()
+            animXList.add(animX)
+            animYList.add(animY)
+        }
         isAnimationRunning = true
     }
 
     private fun stopBallsAnimation() {
         animXList.forEach { it.cancel() }
         animYList.forEach { it.cancel() }
-        balls.forEach { ball ->
-            ball.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
-        }
+
         isAnimationRunning = false
     }
     private fun randomlySelectRestaurant() {
