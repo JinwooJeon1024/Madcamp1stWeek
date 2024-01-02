@@ -1,0 +1,92 @@
+[
+  {
+    "imageUrl": "https://i.namu.wiki/i/qFWfOHBd0mx7NmNquwtaSbUjnPumXpk5oi1jxNKpWUsv_eGJe44xm9AePkbhQ6hIxTjMtroFaOFPbhBy0MSbNQ.webp",
+    "name": "이미지 1",
+    "rating": "⭐4.5",
+    "content": "아름다운 풍경 1"
+  },
+  {
+    "imageUrl": "https://hannamkitchen.com/wp-content/uploads/2017/09/분식전문점-컨셉-blog-5.jpg",
+    "name": "이미지 2",
+    "rating": "⭐4.2",
+    "content": "맛있는 음식 2"
+  },
+  {
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU",
+    "name": "이미지 3",
+    "rating": "⭐4.7",
+    "content": "멋진 공간 3"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220408_245%2F164941334940196Gkg_JPEG%2F5B0BA142-F960-4950-A4AB-5E6E98C4D711.jpeg",
+    "name": "이미지 4",
+    "rating": "⭐3.5",
+    "content": "편안한 분위기 4"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220408_245%2F164941334940196Gkg_JPEG%2F5B0BA142-F960-4950-A4AB-5E6E98C4D711.jpeg",
+    "name": "이미지 5",
+    "rating": "⭐4.0",
+    "content": "화려한 광경 5"
+  },
+  {
+    "imageUrl": "https://lh3.googleusercontent.com/p/AF1QipMAOrJ-OKlA8ninpT86M6G7f9KQBAHfLaxYKALr=s1360-w1360-h1020",
+    "name": "이미지 6",
+    "rating": "⭐4.8",
+    "content": "흥미로운 장소 6"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220408_245%2F164941334940196Gkg_JPEG%2F5B0BA142-F960-4950-A4AB-5E6E98C4D711.jpeg",
+    "name": "이미지 7",
+    "rating": "⭐3.9",
+    "content": "이색적인 경험 7"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA4MDJfMTQ5%2FMDAxNjkwOTc3NTQ1ODMz.TvibMxl18uH6kPWDpFveK8Fj6lqIf5pSjCBq3CTlpmog.Pz72Vs-siRNxTtci0jh2bi8ekzFZ-qToWCPLN6EH-Jsg.JPEG%2FCE954333-D467-493F-90AF-7020EAD4B25D.jpeg",
+    "name": "이미지 8",
+    "rating": "⭐4.3",
+    "content": "멋진 설계 8"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzExMjdfMjEg%2FMDAxNzAxMDY5NTA5MTI5.zXKRwXwENG6XryNarS-HLxEFrhYlFOI8PLH0LMLnyF8g.kJ1rmnTttPWFIadExSAS1Y8XfxbcTMgKh7cJgWsBXbYg.JPEG%2FFBF8602D-DDE7-4FDC-B007-79C32D7E11BF.jpeg",
+    "name": "이미지 9",
+    "rating": "⭐4.6",
+    "content": "포토제닉한 장소 9"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230426_20%2F1682485286666CUder_JPEG%2F1678995698401.jpg",
+    "name": "이미지 10",
+    "rating": "⭐5.0",
+    "content": "최고의 명소 10"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzExMjZfMTg0%2FMDAxNzAwOTYwMjc4ODg0.9rlItGYfhQTKgegw5L5zdmL0u4JACb-FS7kyw-AUf0gg.HWREL2mpFe2_ZlF3tJ1QGDlDs3FlFVpfyrDJW5ZGD_Ag.JPEG%2F20231124_184118.jpg",
+    "name": "이미지 11",
+    "rating": "⭐3.8",
+    "content": "자연과 함께 11"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231218_235%2F1702853074659Hrc4k_JPEG%2FKakaoTalk_20231218_064202681_04.jpg",
+    "name": "이미지 12",
+    "rating": "⭐4.1",
+    "content": "가볼만한 곳 12"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzEyMzBfMTQ4%2FMDAxNzAzOTA3Nzk5MTAw.UVcXXmjAkP6E1ovEA_2RrHjOclPNWHKRaajYdnaKgrQg.GZmJmN6o4lwuwhW6xJZSIbx7n68x0Q50ty_WQ5tu4M8g.JPEG%2F20231230_124035.jpg",
+    "name": "이미지 13",
+    "rating": "⭐4.4",
+    "content": "아름다운 야경 13"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200830_258%2F1598754289239fFzSH_JPEG%2FLm_eZKAWQN9panY6Numgh743.jpg",
+    "name": "이미지 14",
+    "rating": "⭐3.7",
+    "content": "숨겨진 보석 14"
+  },
+  {
+    "imageUrl": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA3MTlfMjU0%2FMDAxNTMxOTYyNzA1NjM0.pNNw6T6NZjDjViU5vMrS-BwjWFhRe558PiSKfWaXgO8g.WsYGN3Lz5U6imWq9fHQzGiR565j0uqlfOHKI03Q9_DIg.JPEG.wbdwbd1004%2FIMG_7160.jpg",
+    "name": "이미지 15",
+    "rating": "⭐4.9",
+    "content": "전통적인 매력 15"
+  }
+]
