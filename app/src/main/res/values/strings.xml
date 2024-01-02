@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Madcamp1stWeek</string>
+    <string name="app_name">오늘 뭐 먹지?</string>
     <string name="title_home">맛집 list</string>
     <string name="title_dashboard">리뷰</string>
     <string name="title_notifications">맛집게임</string>
