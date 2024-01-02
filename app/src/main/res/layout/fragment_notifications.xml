@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/bibimbap"
+        android:translationX="250dp"
+        android:translationY="-220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="202dp"
+        android:layout_height="379dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/fastfood"
+        android:translationX="-250dp"
+        android:translationY="-80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="0dp"
@@ -14,13 +38,15 @@
         android:layout_marginEnd="8dp"
         android:text="식당 고르기 힘드시죠?\n\n 저희가 추천해드릴게요\n\n 버튼을 눌러보세요 !!"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.613" />
+        app:layout_constraintVertical_bias="0.768" />
 
     <Button
         android:id="@+id/button"
@@ -28,10 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
         android:text="추천 받기"
+        android:textStyle="bold"
         style="@style/MyButtonStyle"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -101,7 +101,7 @@ class GameActivity : AppCompatActivity() {
             val ball = ImageView(this@GameActivity).apply {
                 val gradientDrawable = GradientDrawable().apply {
                     shape = GradientDrawable.OVAL
-                    colors = intArrayOf(0xFFE68A00.toInt(), 0xFFFFFFFF.toInt())  // 오렌지색 그라데이션
+                    colors = intArrayOf(0xFFFF982E.toInt(), 0xFFFFFFFF.toInt())  // 오렌지색 그라데이션
                     gradientType = GradientDrawable.RADIAL_GRADIENT  // 원형 그라데이션
                     gradientRadius = 200f  // 그라데이션 반경
                 }
@@ -238,6 +238,21 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    private fun getCategoryName(categoryNumber: String): String {
+        return when (categoryNumber) {
+            "1" -> "버거"
+            "2" -> "회, 해물"
+            "3" -> "피자"
+            "4" -> "양식"
+            "5" -> "중식"
+            "6" -> "치킨"
+            "7" -> "한식"
+            "8" -> "일식"
+            "9" -> "돈까스"
+            "10" -> "분식"
+            else -> "알 수 없는 카테고리"
+        }
+    }
     private fun showRestaurantDialog(restaurant: Restaurant) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_lotto, null)
         val imageView = dialogView.findViewById<ImageView>(R.id.dialog_image)
@@ -245,7 +260,7 @@ class GameActivity : AppCompatActivity() {
         val categoryTextView = dialogView.findViewById<TextView>(R.id.dialog_category)
 
         nameTextView.text = restaurant.name
-        categoryTextView.text = "Category: ${restaurant.category}"
+        categoryTextView.text = "음식 카테고리 : ${getCategoryName(restaurant.category)}"
 
         Glide.with(this)
             .load(restaurant.imageUrl)
@@ -256,6 +271,7 @@ class GameActivity : AppCompatActivity() {
             .setView(dialogView)
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
+
     }
 }
 

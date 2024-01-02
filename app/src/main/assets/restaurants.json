@@ -3,56 +3,78 @@
     "name": "피자뉴스",
     "phoneNumber": "042-823-8874",
     "address": "대전 유성구 문화원로 55 1층",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm4nR3sQI6R-1ihgqANMQCygpUB_CHWHuJJo0-jKHlOQ&s",
-    "id": "221f7679-4f58-4daa-af06-a291d345a2a4"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm4nR3sQI6R-1ihgqANMQCygpUB_CHWHuJJo0-jKHlOQ&s"
   },
   {
     "name": "달달 마라탕",
     "phoneNumber": "010-2345-6789",
     "address": "수연시 수연구 수연로 01-04",
-    "imageUrl": "https://m.designdaldal.com/web/product/big/202104/8b2e6fa181bd15795a27fe3948797284.png",
-    "id": "ec872284-8a0f-4fe6-8962-9ba78d015c35"
+    "imageUrl": "https://m.designdaldal.com/web/product/big/202104/8b2e6fa181bd15795a27fe3948797284.png"
   },
   {
     "name": "훌랄라참숯치킨",
     "phoneNumber": "042-863-5577",
     "address": "대전 유성구 어은로 48번길 9-9",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU",
-    "id": "1c038c56-1afa-4c96-b8bd-8c212fbfd3d5"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAAtxDzu-XSaz_Sj3NT5CB-7kBySEX7RKfGQ&usqp=CAU"
   },
   {
     "name": "궁 칼국수",
     "phoneNumber": "042-861-1551",
     "address": "대전 유성구 어은로 58번길 10",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqnq2QjPyDCzKi8yQLWOMSJTmcRBXMXZhG3Q&usqp=CAU",
-    "id": "3c51b903-8119-4788-9b4a-c554ebe323c0"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqnq2QjPyDCzKi8yQLWOMSJTmcRBXMXZhG3Q&usqp=CAU"
   },
   {
     "name": "투다리 어은점",
     "phoneNumber": "042-863-8569",
     "address": "대전 유성구 어은로 52번길 9",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupAnrle9KfvhBHw6wEGwoAwvFSUiG74zTq6feNgiUZA&s",
-    "id": "8f0470d1-4615-4676-96ab-a424be687b7d"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupAnrle9KfvhBHw6wEGwoAwvFSUiG74zTq6feNgiUZA&s"
   },
   {
     "name": "이비가짬뽕",
     "phoneNumber": "042-624-7484",
     "address": "대전 동구 계족로 509",
-    "imageUrl": "https://modo-phinf.pstatic.net/20191224_52/1577154308928W6Xoo_JPEG/mosa5PAcxM.jpeg?type=f320_320",
-    "id": "7919ee9f-6b64-4185-a815-80b3b73e5065"
+    "imageUrl": "https://modo-phinf.pstatic.net/20191224_52/1577154308928W6Xoo_JPEG/mosa5PAcxM.jpeg?type=f320_320"
   },
   {
     "name": "고씨네",
     "phoneNumber": "0507-1320-5915",
     "address": "대전 유성구 궁동로 18번길 8",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ykzM1a55qEY4Q5q6MHMsdD_vfbafgksKJJjXkYTOvg&s",
-    "id": "f51fba11-db45-4e07-ae10-14194c98994f"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ykzM1a55qEY4Q5q6MHMsdD_vfbafgksKJJjXkYTOvg&s"
   },
   {
-    "name": "모티프",
-    "phoneNumber": "0507-1483-5612",
-    "address": "대전 유성구 대학로 235-1",
-    "imageUrl": "https://mblogthumb-phinf.pstatic.net/MjAyMTA3MjZfMTY4/MDAxNjI3MjcxMDEwMjg2.dm-kXDn_gZpL7b7CLiBPtSsxkJUJxrSZfDrWWKZSProg.0JfHG-ziGZKPb9JpJDHu5EarOPylEzjcczZn8vKcrOQg.JPEG.rlajho/IMG_4026.jpg?type=w800",
-    "id": "ee3039f4-53a8-4e47-9ad7-54063518c427"
+    "name": "태평소국밥",
+    "phoneNumber": "042-525-5820",
+    "address": "대전 유성구 온천동로 65번길 50",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220802_119%2F1659417244456SsFlE_JPEG%2FScreenshot_20220802-105448_Instagram.jpg"
+  },
+  {
+    "name": "성심당 케익부띠끄",
+    "phoneNumber": "1588-8069",
+    "address": "대전 중구 대종로 480",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220513_212%2F1652416847552bkCb7_JPEG%2F%25BC%25BA%25BD%25C9%25B4%25E7_%25C4%25C9%25C0%25CD%25BA%25CE%25B6%25EC%25B2%25F4.jpg"
+  },
+  {
+    "name": "오씨칼국수",
+    "phoneNumber": "042-627-9972",
+    "address": "대전 동구 옛신탄진로 13",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200114_70%2F1579008854401Q0bIC_JPEG%2FZBSHIgTNAy4DZATvKa2iTEb1.jpg"
+  },
+  {
+    "name": "세컨디포레스트",
+    "phoneNumber": "0507-11477-4030",
+    "address": "대전 중구 중앙로 164번길 50",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230220_259%2F1676867630427dP423_JPEG%2FP20220911_155930954_0F9A13FF-FC2F-424A-8857-8C0AABB3CA3F.JPG"
+  },
+  {
+    "name": "고베규카츠",
+    "phoneNumber": "0507-1383-8289",
+    "address": "대전 중구 대종로 480번길 7",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230407_159%2F1680857124657AVUqe_JPEG%2FKakaoTalk_20230329_174932601.jpg"
+  },
+  {
+    "name": "오시우커피",
+    "phoneNumber": "042-223-3337",
+    "address": "대전 중구 목척8실 39",
+    "imageUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210902_198%2F1630557776186nNbpI_JPEG%2Fte1fLv4KjHai55iGZgS_MUqo.jpeg.jpg"
   }
 ]
