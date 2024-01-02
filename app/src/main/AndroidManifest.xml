@@ -25,11 +25,16 @@
         <activity
             android:name=".AddRestaurantActivity"
             android:exported="true"
-        android:label="@string/title_add_restaurant">
+            android:label="@string/title_add_restaurant">
         </activity>
-        <activity android:name=".AddReviewActivity"/>
-        <activity android:name=".GameActivity"/>
+
+        <activity
+            android:name=".AddReviewActivity"
+            android:exported="true"
+            android:label="@string/title_add_review">
+        </activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
