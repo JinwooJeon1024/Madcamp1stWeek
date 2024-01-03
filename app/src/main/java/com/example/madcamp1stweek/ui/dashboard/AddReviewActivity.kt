@@ -86,7 +86,7 @@ class AddReviewActivity: AppCompatActivity() {
             text.text = "추가되었습니다 !"
 
             with (Toast(applicationContext)) {
-                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 940)
+                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 1475)
                 duration = Toast.LENGTH_SHORT
                 view = layout
                 show()

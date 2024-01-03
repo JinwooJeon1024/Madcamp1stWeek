@@ -240,7 +240,7 @@ class GameActivity : AppCompatActivity() {
         text.text = message
 
         with(Toast(applicationContext)) {
-            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 930)
+            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 1450)
             duration = Toast.LENGTH_SHORT
             view = layout
             show()

@@ -118,7 +118,7 @@ class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, 
         text.text = message
 
         with(Toast(context)) {
-            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 860)
+            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 1350)
             duration = Toast.LENGTH_SHORT
             view = layout
             show()

@@ -45,7 +45,7 @@ class AddRestaurantActivity : AppCompatActivity() {
             text.text = "저장되었습니다 !"
 
             with(Toast(applicationContext)) {
-                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 860)
+                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 1350)
                 duration = Toast.LENGTH_SHORT
                 view = layout
                 show()
