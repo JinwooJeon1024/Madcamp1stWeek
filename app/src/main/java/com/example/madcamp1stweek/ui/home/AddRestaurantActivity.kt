@@ -3,6 +3,7 @@ package com.example.madcamp1stweek.ui.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -44,6 +45,7 @@ class AddRestaurantActivity : AppCompatActivity() {
             text.text = "저장되었습니다 !"
 
             with(Toast(applicationContext)) {
+                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 860)
                 duration = Toast.LENGTH_SHORT
                 view = layout
                 show()

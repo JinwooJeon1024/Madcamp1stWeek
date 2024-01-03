@@ -1,6 +1,7 @@
 package com.example.madcamp1stweek.ui.home
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -117,6 +118,7 @@ class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, 
         text.text = message
 
         with(Toast(context)) {
+            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 860)
             duration = Toast.LENGTH_SHORT
             view = layout
             show()

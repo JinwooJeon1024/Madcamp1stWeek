@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.view.Gravity
 import android.widget.TextView
 import com.example.madcamp1stweek.R
 
@@ -85,6 +86,7 @@ class AddReviewActivity: AppCompatActivity() {
             text.text = "추가되었습니다 !"
 
             with (Toast(applicationContext)) {
+                setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 940)
                 duration = Toast.LENGTH_SHORT
                 view = layout
                 show()
