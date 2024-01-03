@@ -19,11 +19,15 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingTop="8dp"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/dialogItemRating"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"  />

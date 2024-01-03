@@ -10,7 +10,7 @@
     <!-- 내용물 층 -->
     <item android:top="2dp" android:right="2dp" android:left="2dp">
         <shape android:shape="rectangle">
-            <solid android:color="#FFACAC"/> <!-- 배경색 -->
+            <solid android:color="#FFFFFF"/> <!-- 배경색 -->
             <corners android:radius="20dp"/> <!-- 모서리의 둥글기 정도 -->
         </shape>
     </item>

@@ -232,10 +232,10 @@ class GameActivity : AppCompatActivity() {
                 val selectedRestaurant = filteredRestaurants.random()
                 showRestaurantDialog(selectedRestaurant)
             } else {
-                Toast.makeText(this, "No restaurants found for the selected category.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "선택한 카테고리의 식당이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(this, "Please select at least one category.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "적어도 하나의 카테고리를 선택해주세요 !", Toast.LENGTH_SHORT).show()
         }
     }
 

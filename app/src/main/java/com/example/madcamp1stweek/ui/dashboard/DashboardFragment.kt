@@ -27,7 +27,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.fragment.app.viewModels
 import android.app.AlertDialog
+import android.graphics.PorterDuff
 import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 
@@ -93,6 +95,12 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val imageButton = view.findViewById<ImageButton>(R.id.addReviewButton)
+        val color = context?.let { ContextCompat.getColor(it, R.color.white) } // 원하는 색상 리소스
+        if (color != null) {
+            imageButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        }
 
         // 식당 등록하기 버튼 클릭 이벤트 처리
         binding.addReviewButton.setOnClickListener {
