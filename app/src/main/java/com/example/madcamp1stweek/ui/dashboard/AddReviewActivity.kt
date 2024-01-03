@@ -75,8 +75,8 @@ class AddReviewActivity: AppCompatActivity() {
                 putExtra("rating", rating)
                 putExtra("content", content)
                 putExtra("imageUrl", selectedImageUri ?: "")  // 선택된 이미지의 URI를 보냄
-                Log.d("tag", "$selectedImageUri")
             }
+            setResult(Activity.RESULT_OK, data)
 
             val inflater = layoutInflater
             val layout = inflater.inflate(R.layout.custom_toast, null)  // custom_toast_layout는 커스텀 레이아웃 파일 이름입니다.
