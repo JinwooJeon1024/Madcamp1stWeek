@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -42,7 +43,10 @@ class HomeFragment : Fragment() {
 
         fun loadRestaurantsFromJSON(context: Context) {
             val jsonString = context.assets.open("restaurants.json").bufferedReader().use { it.readText() }
-            loadedRestaurants.value = Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type)
+            val tempList = Gson().fromJson(jsonString, object : TypeToken<List<Restaurant>>() {}.type) as List<Restaurant>
+            val sortedList = tempList.sortedBy { it.name }
+            // LiveData 업데이트
+            loadedRestaurants.value = sortedList
         }
 
         fun addRestaurant(newRestaurant: Restaurant) {
@@ -58,6 +62,7 @@ class HomeFragment : Fragment() {
             val index = currentList.indexOfFirst { it.id == updatedRestaurant.id }
             if (index != -1) {
                 updatedList[index] = updatedRestaurant
+                updatedList.sortBy { it.name } // Or any other sorting if necessary
                 loadedRestaurants.value = updatedList  // LiveData 업데이트
             }
         }
@@ -128,8 +133,6 @@ class HomeFragment : Fragment() {
                 val imageUrl = it.getStringExtra("imageUrl")?:""
                 val newRestaurant = Restaurant(id, name, address, phoneNumber, imageUrl)  // 기본 설명 추가
                 restaurantViewModel.addRestaurant(newRestaurant)
-                // 어댑터에 알림을 보내 리스트를 갱신
-
             }
         }
     }
@@ -208,6 +211,7 @@ class HomeFragment : Fragment() {
                         imageUrl = updatedImageUrl  // Update this line
                     )
                     onRestaurantEditedListener.onRestaurantEdited(updatedRestaurant)
+                    Toast.makeText(context, "수정되었습니다!", Toast.LENGTH_SHORT).show()
                 }
                 setNegativeButton("취소", null)
             }.create()
@@ -220,6 +224,7 @@ class HomeFragment : Fragment() {
                     setMessage("삭제하시겠습니까 ?")
                     setPositiveButton("삭제하기") { _, _ ->
                         onRestaurantEditedListener.onRestaurantDeleted(restaurant.id)  // Call the delete method
+                        Toast.makeText(context, "삭제되었습니다!", Toast.LENGTH_SHORT).show()
                         editDialog.dismiss()  // Dismiss the edit dialog
                     }
                     setNegativeButton("취소", null)
