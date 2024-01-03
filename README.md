@@ -22,8 +22,8 @@
 ## 주요 기능
 #### 맛집 list
 <p align="center">
-  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/ffcb4201-c628-4d14-be13-a9c38c0be94f" width="45%" style="margin-right:10px;"/>
-  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/1982b3c6-ce3b-4f0a-9954-1654fb62140c" width="45%"/>
+  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/ffcb4201-c628-4d14-be13-a9c38c0be94f" width="30%" style="margin-right:10px;"/>
+  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/1982b3c6-ce3b-4f0a-9954-1654fb62140c" width="30%"/>
 </p>
 
 
