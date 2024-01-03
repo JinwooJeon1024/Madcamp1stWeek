@@ -83,7 +83,7 @@ class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, 
                     imageUrl = updatedImageUrl  // Update this line
                 )
                 onRestaurantEditedListener.onRestaurantEdited(updatedRestaurant)
-                Toast.makeText(context, "수정되었습니다!", Toast.LENGTH_SHORT).show()
+                showCustomToast(context, "수정되었습니다!")
             }
             setNegativeButton("취소", null)
         }.create()
@@ -96,7 +96,7 @@ class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, 
                 setMessage("삭제하시겠습니까 ?")
                 setPositiveButton("삭제하기") { _, _ ->
                     onRestaurantEditedListener.onRestaurantDeleted(restaurant.id)  // Call the delete method
-                    Toast.makeText(context, "삭제되었습니다!", Toast.LENGTH_SHORT).show()
+                    showCustomToast(context, "삭제되었습니다!")
                     editDialog.dismiss()  // Dismiss the edit dialog
                 }
                 setNegativeButton("취소", null)
@@ -104,6 +104,23 @@ class RestaurantAdapter(private var loadedRestaurants: MutableList<Restaurant>, 
         }
 
         editDialog.show()
+    }
+
+    fun showCustomToast(context: Context, message: String) {
+        val inflater = LayoutInflater.from(context)
+        val layout = inflater.inflate(
+            R.layout.custom_toast,  // 사용자 정의 토스트 레이아웃 파일
+            null
+        )
+
+        val text: TextView = layout.findViewById(R.id.custom_toast_message) // 사용자 정의 토스트의 TextView
+        text.text = message
+
+        with(Toast(context)) {
+            duration = Toast.LENGTH_SHORT
+            view = layout
+            show()
+        }
     }
     fun setRestaurants(list: List<Restaurant>){
         submitList(list)
