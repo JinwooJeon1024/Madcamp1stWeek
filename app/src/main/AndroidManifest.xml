@@ -22,18 +22,18 @@
         </activity>
 
         <activity
-            android:name=".AddRestaurantActivity"
+            android:name=".ui.home.AddRestaurantActivity"
             android:exported="true"
             android:label="@string/title_add_restaurant">
         </activity>
 
         <activity
-            android:name=".AddReviewActivity"
+            android:name=".ui.dashboard.AddReviewActivity"
             android:exported="true"
             android:label="@string/title_add_review">
         </activity>
 
-        <activity android:name=".GameActivity"/>
+        <activity android:name=".ui.notifications.GameActivity"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

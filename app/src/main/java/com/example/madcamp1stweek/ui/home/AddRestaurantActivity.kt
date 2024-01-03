@@ -1,4 +1,4 @@
-package com.example.madcamp1stweek
+package com.example.madcamp1stweek.ui.home
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.madcamp1stweek.R
 
 class AddRestaurantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

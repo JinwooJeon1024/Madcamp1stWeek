@@ -1,4 +1,4 @@
-package com.example.madcamp1stweek
+package com.example.madcamp1stweek.ui.dashboard
 
 import android.app.Activity
 import android.content.Intent
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import com.example.madcamp1stweek.R
 
 class AddReviewActivity: AppCompatActivity() {
 

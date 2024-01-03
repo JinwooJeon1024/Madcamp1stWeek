@@ -1,6 +1,5 @@
 package com.example.madcamp1stweek.ui.dashboard
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,22 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.load.MultiTransformation
-import com.example.madcamp1stweek.AddReviewActivity
 import com.example.madcamp1stweek.R
 import com.example.madcamp1stweek.databinding.FragmentDashboardBinding
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.fragment.app.viewModels
 import android.app.AlertDialog
 import android.graphics.PorterDuff
@@ -33,31 +20,6 @@ import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 
-data class ItemData(val imageUrl: String, val name: String, val rating: String, val content: String)
-class DashboardViewModel : ViewModel() {
-    val loadedReviews = MutableLiveData<MutableList<ItemData>>()
-
-    init {
-        loadedReviews.value = mutableListOf()
-    }
-
-    fun addReview(newReview: ItemData) {
-        val updatedList = ArrayList(loadedReviews.value ?: mutableListOf())
-        updatedList.add(newReview)
-        updatedList.sortBy { it.name }
-        loadedReviews.value = updatedList
-    }
-
-    fun loadReviews(context: Context) {
-        val reviews = loadRestaurantsFromAssets(context)
-        loadedReviews.value = reviews.toMutableList()
-    }
-
-    private fun loadRestaurantsFromAssets(context: Context): List<ItemData> {
-        val jsonString = context.assets.open("review.json").bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonString, object : TypeToken<List<ItemData>>() {}.type)
-    }
-}
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
@@ -171,57 +133,5 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    class ReviewAdapter(private val onItemClick: (ItemData) -> Unit) : ListAdapter<ItemData, ReviewAdapter.ViewHolder>(RestaurantDiffCallback()) {
-        // ViewHolder 및 기타 필요한 메서드 구현
-        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val nameTextView: TextView = itemView.findViewById(R.id.textView)
-            val ratingTextView: TextView = itemView.findViewById(R.id.ratingView)
-            val imageView: ImageView = itemView.findViewById(R.id.imageView)
-            fun bind(item: ItemData, onItemClick: (ItemData) -> Unit) {
-                nameTextView.text = item.name
-                ratingTextView.text = item.rating
-                // 이미지 로딩 등
-
-                itemView.setOnClickListener {
-                    onItemClick(item)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_review, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = getItem(position)
-            holder.nameTextView.text = item.name
-            holder.ratingTextView.text = item.rating
-            holder.bind(item, onItemClick)
-            val options = RequestOptions().transform(MultiTransformation(CenterCrop(), RoundedCorners(16)))
-
-            Glide.with(holder.itemView.context)
-                .load(item.imageUrl)
-                .apply(options)
-                .into(holder.imageView)
-        }
-
-        fun setReviews(list: List<ItemData>){
-            submitList(list)
-        }
-
-
-        class RestaurantDiffCallback : DiffUtil.ItemCallback<ItemData>() {
-            override fun areItemsTheSame(oldItem: ItemData, newItem: ItemData): Boolean {
-                return oldItem.name == newItem.name
-            }
-
-            override fun areContentsTheSame(oldItem: ItemData, newItem: ItemData): Boolean {
-                return oldItem == newItem
-            }
-        }
     }
 }

@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.madcamp1stweek.GameActivity
 import com.example.madcamp1stweek.R
-import com.example.madcamp1stweek.RestaurantViewModel
+import com.example.madcamp1stweek.ui.home.RestaurantViewModel
 import com.example.madcamp1stweek.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {

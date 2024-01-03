@@ -1,4 +1,4 @@
-package com.example.madcamp1stweek
+package com.example.madcamp1stweek.ui.notifications
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -11,8 +11,6 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,27 +18,18 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.dynamicanimation.animation.DynamicAnimation
-import androidx.dynamicanimation.animation.FlingAnimation
 import com.bumptech.glide.Glide
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.madcamp1stweek.R
 import com.example.madcamp1stweek.databinding.ActivityGameBinding
-import com.example.madcamp1stweek.ui.dashboard.DashboardViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 import kotlin.math.max
 import kotlin.math.min
 
-data class Restaurant(
-    val name: String,
-    val imageUrl: String,
-    val category: String
-)
 
 class GameActivity : AppCompatActivity() {
     private val balls = mutableListOf<ImageView>()
@@ -283,24 +272,5 @@ class GameActivity : AppCompatActivity() {
         // AlertDialog를 표시합니다.
         alertDialog.show()
 
-    }
-}
-
-class GameViewModel : ViewModel() {
-    val restaurants = MutableLiveData<List<Restaurant>>()
-
-    fun loadRestaurantsFromJSON(context: Context, fileName: String) {
-        val jsonString = getJsonDataFromAsset(context, fileName)
-        val typeToken = object : TypeToken<List<Restaurant>>() {}.type
-        restaurants.value = Gson().fromJson(jsonString, typeToken)
-    }
-
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String? {
-        return try {
-            context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            null
-        }
     }
 }
