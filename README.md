@@ -1,6 +1,7 @@
 # 오늘 뭐 먹지?
-<img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/36bf22fe-fdba-4ac4-aaa7-74b1af482f92" width="30%"/>
 맛집 리스트, 리뷰, 맛집 추천 앱
+<img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/36bf22fe-fdba-4ac4-aaa7-74b1af482f92" width="30%"/>
+
 
 
 ## 프로젝트 소개
