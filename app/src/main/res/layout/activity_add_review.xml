@@ -30,14 +30,18 @@
     <!-- 갤러리에서 이미지 선택 버튼 -->
     <Button
         android:id="@+id/pickImageButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="이미지 선택" />
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_corners"
+        android:text="갤러리에서 이미지 선택" />
 
     <!-- 저장 버튼 -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        style="@style/MyButtonStyle"
         android:text="저장" />
 </LinearLayout>
