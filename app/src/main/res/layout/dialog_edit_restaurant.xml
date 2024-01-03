@@ -57,7 +57,8 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="식당 삭제하기" />
+        android:text="식당 삭제하기"
+        android:textStyle="bold"/>
 
 </LinearLayout>
 </ScrollView>
