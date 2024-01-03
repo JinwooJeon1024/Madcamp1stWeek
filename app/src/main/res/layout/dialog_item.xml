@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/rounded_dialoglist"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/dialogItemImage"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/dialogItemName"

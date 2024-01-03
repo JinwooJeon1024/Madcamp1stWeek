@@ -29,6 +29,7 @@ import androidx.fragment.app.viewModels
 import android.app.AlertDialog
 import android.widget.AdapterView
 import android.widget.Spinner
+import androidx.core.content.ContextCompat
 
 data class ItemData(val imageUrl: String, val name: String, val rating: String, val content: String)
 class DashboardViewModel : ViewModel() {
@@ -140,6 +141,7 @@ class DashboardFragment : Fragment() {
         contentView.text = itemData.content
 
         val dialog = builder.create()
+        dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialoglist)
         dialog.show()
     }
 

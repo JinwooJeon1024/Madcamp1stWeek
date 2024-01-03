@@ -64,5 +64,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.dynamicanimation:dynamicanimation:1.0.0")
+    implementation ("com.google.android.material:material:1.4.0") // 버전은 최신으로 확인하세요.
+
 
 }

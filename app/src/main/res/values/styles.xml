@@ -11,4 +11,12 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">@drawable/rounded_corners</item>
     </style>
+    <style name="RoundedCorners">
+        <item name="cornerSize">90dp</item>
+    </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_scale</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale</item>
+    </style>
+
 </resources>

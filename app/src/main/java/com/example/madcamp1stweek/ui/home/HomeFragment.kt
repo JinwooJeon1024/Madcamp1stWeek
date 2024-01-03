@@ -193,9 +193,9 @@ class HomeFragment : Fragment() {
             Glide.with(context).load(restaurant.imageUrl).into(imageView)
 
             val editDialog = AlertDialog.Builder(context).apply {
-                setTitle("Edit Restaurant")
+                setTitle("식당 정보 수정하기")
                 setView(view)
-                setPositiveButton("Update") { _, _ ->
+                setPositiveButton("수정하기") { _, _ ->
                     val updatedName = nameEditText.text.toString()
                     val updatedAddress = addressEditText.text.toString()
                     val updatedPhoneNumber = phoneNumberEditText.text.toString()
@@ -209,20 +209,20 @@ class HomeFragment : Fragment() {
                     )
                     onRestaurantEditedListener.onRestaurantEdited(updatedRestaurant)
                 }
-                setNegativeButton("Cancel", null)
+                setNegativeButton("취소", null)
             }.create()
 
             val deleteButton = view.findViewById<Button>(R.id.deleteButton)
             deleteButton.setOnClickListener {
                 // Show confirmation dialog for deletion
                 AlertDialog.Builder(context).apply {
-                    setTitle("Delete Restaurant")
-                    setMessage("Are you sure you want to delete this restaurant?")
-                    setPositiveButton("Delete") { _, _ ->
+                    setTitle("식당 삭제하기")
+                    setMessage("삭제하시겠습니까 ?")
+                    setPositiveButton("삭제하기") { _, _ ->
                         onRestaurantEditedListener.onRestaurantDeleted(restaurant.id)  // Call the delete method
                         editDialog.dismiss()  // Dismiss the edit dialog
                     }
-                    setNegativeButton("Cancel", null)
+                    setNegativeButton("취소", null)
                 }.create().show()
             }
 
@@ -244,7 +244,6 @@ class HomeFragment : Fragment() {
                 return oldItem == newItem
             }
         }
-
     }
     class SpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
         // getItemOffsets 구현

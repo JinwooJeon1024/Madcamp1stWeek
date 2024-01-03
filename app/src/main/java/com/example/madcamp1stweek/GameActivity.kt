@@ -24,6 +24,7 @@ import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.FlingAnimation
 import com.bumptech.glide.Glide
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -259,7 +260,7 @@ class GameActivity : AppCompatActivity() {
         val nameTextView = dialogView.findViewById<TextView>(R.id.dialog_name)
         val categoryTextView = dialogView.findViewById<TextView>(R.id.dialog_category)
 
-        nameTextView.text = restaurant.name
+        nameTextView.text = "식당 이름 : ${(restaurant.name)}"
         categoryTextView.text = "음식 카테고리 : ${getCategoryName(restaurant.category)}"
 
         Glide.with(this)
@@ -267,10 +268,20 @@ class GameActivity : AppCompatActivity() {
             .error(R.drawable.imagenotfound)
             .into(imageView)
 
-        AlertDialog.Builder(this)
+        // AlertDialog를 생성하고 설정합니다.
+        val alertDialog = AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-            .show()
+            .create()
+
+        // AlertDialog의 배경을 커스텀 drawable로 설정합니다.
+        val background = ContextCompat.getDrawable(this, R.drawable.rounded_dialog)
+        alertDialog.window?.apply{
+            setBackgroundDrawable(background)
+            attributes.windowAnimations = R.style.DialogAnimation
+        }
+
+        // AlertDialog를 표시합니다.
+        alertDialog.show()
 
     }
 }
