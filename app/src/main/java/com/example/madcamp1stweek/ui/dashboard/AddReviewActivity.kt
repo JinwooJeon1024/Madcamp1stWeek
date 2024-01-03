@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.widget.TextView
 import com.example.madcamp1stweek.R
 
 class AddReviewActivity: AppCompatActivity() {
@@ -77,8 +78,17 @@ class AddReviewActivity: AppCompatActivity() {
                 Log.d("tag", "$selectedImageUri")
             }
 
-            setResult(Activity.RESULT_OK, data)
-            Toast.makeText(this, "저장되었습니다!", Toast.LENGTH_SHORT).show()
+            val inflater = layoutInflater
+            val layout = inflater.inflate(R.layout.custom_toast, null)  // custom_toast_layout는 커스텀 레이아웃 파일 이름입니다.
+
+            val text: TextView = layout.findViewById(R.id.custom_toast_message)
+            text.text = "추가되었습니다 !"
+
+            with (Toast(applicationContext)) {
+                duration = Toast.LENGTH_SHORT
+                view = layout
+                show()
+            }
             finish()  // 액티비티 종료
         }
     }

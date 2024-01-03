@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.madcamp1stweek.R
@@ -36,7 +37,17 @@ class AddRestaurantActivity : AppCompatActivity() {
 
             setResult(Activity.RESULT_OK, data)
 
-            Toast.makeText(this, "저장되었습니다 !", Toast.LENGTH_SHORT).show()
+            val inflater = layoutInflater
+            val layout = inflater.inflate(R.layout.custom_toast, null)
+
+            val text: TextView = layout.findViewById(R.id.custom_toast_message)
+            text.text = "저장되었습니다 !"
+
+            with(Toast(applicationContext)) {
+                duration = Toast.LENGTH_SHORT
+                view = layout
+                show()
+            }
             finish()
         }
     }

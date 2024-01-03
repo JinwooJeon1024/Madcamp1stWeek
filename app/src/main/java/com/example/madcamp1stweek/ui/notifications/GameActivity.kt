@@ -210,7 +210,7 @@ class GameActivity : AppCompatActivity() {
         val restaurants = viewModel.restaurants.value ?: return
 
         val selectedIndices = isSelected
-            .mapIndexed { index, isSelected -> if (isSelected) index+1 else null }
+            .mapIndexed { index, isSelected -> if (isSelected) index + 1 else null }
             .filterNotNull() // This will remove any null entries, effectively mimicking mapIndexedNotNull
 
         if (selectedIndices.isNotEmpty()) {
@@ -221,10 +221,27 @@ class GameActivity : AppCompatActivity() {
                 val selectedRestaurant = filteredRestaurants.random()
                 showRestaurantDialog(selectedRestaurant)
             } else {
-                Toast.makeText(this, "선택한 카테고리의 식당이 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                showCustomToast("선택한 카테고리의 식당이 존재하지 않습니다.")
+                // custom_toast_layout는 커스텀 레이아웃 파일 이름입니다.
             }
         } else {
-            Toast.makeText(this, "적어도 하나의 카테고리를 선택해주세요 !", Toast.LENGTH_SHORT).show()
+            showCustomToast("하나의 카테고리를 선택해주세요 !")
+        }
+    }
+    private fun showCustomToast(message: String) {
+        val inflater = layoutInflater
+        val layout = inflater.inflate(
+            R.layout.custom_toast,  // 여기서 custom_toast는 사용자 정의 토스트 레이아웃 파일입니다.
+            findViewById(R.id.custom_toast_message)
+        )
+
+        val text: TextView = layout.findViewById(R.id.custom_toast_message)
+        text.text = message
+
+        with(Toast(applicationContext)) {
+            duration = Toast.LENGTH_SHORT
+            view = layout
+            show()
         }
     }
 
