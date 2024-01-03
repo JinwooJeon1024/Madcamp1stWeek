@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeFragment"
+    android:padding="10dp">
 
     <!-- 식당 목록을 표시할 RecyclerView -->
     <!-- 식당 등록하기 버튼 -->
@@ -16,14 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/addRestaurantButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/addRestaurantButton"
+        style="@style/MyButtonStyle"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="10dp"
-        style="@style/MyButtonStyle"
+        android:layout_marginBottom="4dp"
         android:text="식당 등록하기"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
