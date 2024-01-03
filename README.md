@@ -32,6 +32,8 @@
 #### 리뷰
 <p align="center">
   <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/f5f76342-d827-486d-a466-cc2686951d06" width="30%"/>
+  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/c03442ae-3f3e-4529-a1b7-857545eb3b88" width="30%"/>
+
 </p>
 
 - **Major Features** : 이름순으로 정렬된 리뷰가 나타납니다. 갤러리와 연동해서 이미지가 포함된 리뷰를 업로드할 수 있습니다.
