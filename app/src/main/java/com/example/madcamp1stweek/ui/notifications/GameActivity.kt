@@ -10,6 +10,7 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
+import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -225,7 +226,7 @@ class GameActivity : AppCompatActivity() {
                 // custom_toast_layout는 커스텀 레이아웃 파일 이름입니다.
             }
         } else {
-            showCustomToast("하나의 카테고리를 선택해주세요 !")
+            showCustomToast("카테고리를 선택해주세요 !")
         }
     }
     private fun showCustomToast(message: String) {
@@ -239,6 +240,7 @@ class GameActivity : AppCompatActivity() {
         text.text = message
 
         with(Toast(applicationContext)) {
+            setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 930)
             duration = Toast.LENGTH_SHORT
             view = layout
             show()
