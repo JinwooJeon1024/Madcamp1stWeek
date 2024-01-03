@@ -21,8 +21,11 @@
 
 ## 주요 기능
 #### 맛집 list
-![image](https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/ffcb4201-c628-4d14-be13-a9c38c0be94f)
-![image](https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/1982b3c6-ce3b-4f0a-9954-1654fb62140c)
+<p align="center">
+  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/ffcb4201-c628-4d14-be13-a9c38c0be94f" width="45%" style="margin-right:10px;"/>
+  <img src="https://github.com/JinwooJeon1024/Madcamp1stWeek/assets/104386015/1982b3c6-ce3b-4f0a-9954-1654fb62140c" width="45%"/>
+</p>
+
 
 - **Major Features** :  이름순으로 정렬된 맛집 연락처가 나타납니다. 등록하기, 수정하기, 삭제하기 모두 가능합니다.
 - **기술 설명** : RecyclerView를 이용해서 JSON에 저장된 데이터를 나열했고 새 액티비티를 열어서 식당 등록하기를 구현했습니다.
